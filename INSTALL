@@ -1,0 +1,12 @@
+Install this webservice and all python dependencies (including CLAM itself) as follows:
+
+ $ pip install .
+
+You may need to use sudo for global installation. We recommend the use of a Python virtual environment.
+
+We recommmend using Docker/OCI containers for production deployments, build and run one using:
+
+ $ ./startserver_production.sh 
+
+Check the contents of that script for further explanations.
+
