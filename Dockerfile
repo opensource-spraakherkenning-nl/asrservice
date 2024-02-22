@@ -22,6 +22,10 @@ ENV CLAM_OAUTH_CLIENT_ID=""
 ENV CLAM_OAUTH_CLIENT_SECRET=""
 #^-- always keep this private!
 
+
+ENV HF_TOKEN=""
+#^-- Set to your huggingface token
+
 # Install all global dependencies
 RUN apt-get update && apt-get install -y --no-install-recommends runit curl ca-certificates nginx uwsgi uwsgi-plugin-python3 python3-pip python3-yaml python3-lxml python3-requests ffmpeg zip git
 

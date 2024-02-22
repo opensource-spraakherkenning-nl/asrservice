@@ -24,13 +24,27 @@ echo "Starting..." >> "$STATUSFILE"
 
 #Example parameter parsing using getopt:
 
-while getopts "l:m:" opt "$@"; do
+if [ -n "$HF_TOKEN" ] ; then
+    EXTRAPARAMS="--hf_token \"$HF_TOKEN\""
+else
+    EXTRAPARAMS=""
+fi
+while getopts "l:m:ds:S:" opt "$@"; do
   case $opt in
     l)
         LANGUAGE=$OPTARG;
         ;;
     m)
         MODEL=$OPTARG;
+        ;;
+    d)
+        EXTRAPARAMS="$EXTRAPARAMS --diarize"
+        ;;
+    s)
+        EXTRAPARAMS="$EXTRAPARAMS --min_speakers \"$OPTARG\""
+        ;;
+    S)
+        EXTRAPARAMS="$EXTRAPARAMS --max_speakers \"$OPTARG\""
         ;;
     \?)
       echo "Invalid option: -$OPTARG" >&2
@@ -42,7 +56,7 @@ done
 [ -n "$MODEL" ] || die "No model set"
 
 echo "Processing files" | tee -a "$STATUSFILE"
-whisperx --model "$MODEL" --language "$LANGUAGE" --compute_type int8 "$INPUTDIRECTORY/"* || die "ASR system failed"
+whisperx --model "$MODEL" --language "$LANGUAGE" --compute_type int8 $EXTRAPARAMS "$INPUTDIRECTORY/"* || die "ASR system failed"
 mv ./*.txt "$OUTPUTDIRECTORY/"
 mv ./*.srt "$OUTPUTDIRECTORY/"
 mv ./*.vtt "$OUTPUTDIRECTORY/"
