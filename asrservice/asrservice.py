@@ -257,8 +257,8 @@ PARAMETERS =  [
     ('Global', [
         ChoiceParameter(id='language',name='Language',description='The language to recognize', choices=[ ('nl','Dutch  / Nederlands'), ('en', 'English'),('de','German / Deutsch'),('fr', 'French / Français'), ('it', 'Italian / Italiano'), ('ja', 'Japanese / 日本語'), ('zh', 'Mandarin Chinese / 普通话'), ('es', 'Spanish / Español'), ('pt', 'Portuguese / Português'), ('uk', 'Ukrainian / Українська') ],default='nl',paramflag='-l'),
         ChoiceParameter(id='model',name='Model',description='The ASR model to use', choices=['tiny','small','medium','large','large-v2', 'large-v3',],default='large-v2',paramflag='-m')
-    ],
-     'Diarization', [
+    ]),
+    ( 'Diarization', [
         BooleanParameter(id='diarization',name="Diarization", description="Enable speaker diarization?",paramflag="-d"),
         IntegerParameter(id='minspeakers',name="Minimum speakers", description="Minimum number of speakers (this helps diarization)",paramflag="-s"),
         IntegerParameter(id='maxspeakers',name="Maximum speakers", description="Minimum number of speakers (this helps diarization)",paramflag="-S"),
