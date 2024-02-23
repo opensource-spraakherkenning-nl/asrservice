@@ -7,6 +7,12 @@ die() {
     exit 1
 }
 
+validate() {
+    if ! echo "$1" | grep -qe '^[a-zA-Z0-9_\.-]*$'; then
+        die "invalid value passed"
+    fi
+}
+
 #This script will be called by CLAM and will run with the current working directory set to the specified project directory
 
 
@@ -24,10 +30,13 @@ echo "Starting..." >> "$STATUSFILE"
 
 #Example parameter parsing using getopt:
 
-if [ -n "$HF_TOKEN" ] ; then
-    EXTRAPARAMS="--hf_token \"$HF_TOKEN\""
+if [ -n "$HF_TOKEN" ]; then
+    validate "$HF_TOKEN"
+    EXTRAPARAMS="--hf_token $HF_TOKEN"
+    echo "HF_TOKEN: Present" >&2
 else
     EXTRAPARAMS=""
+    echo "HF_TOKEN: Missing" >&2
 fi
 while getopts "l:m:ds:S:" opt "$@"; do
   case $opt in
@@ -41,10 +50,12 @@ while getopts "l:m:ds:S:" opt "$@"; do
         EXTRAPARAMS="$EXTRAPARAMS --diarize"
         ;;
     s)
-        EXTRAPARAMS="$EXTRAPARAMS --min_speakers \"$OPTARG\""
+        validate "$OPTARG"
+        EXTRAPARAMS="$EXTRAPARAMS --min_speakers $OPTARG"
         ;;
     S)
-        EXTRAPARAMS="$EXTRAPARAMS --max_speakers \"$OPTARG\""
+        validate "$OPTARG"
+        EXTRAPARAMS="$EXTRAPARAMS --max_speakers $OPTARG"
         ;;
     \?)
       echo "Invalid option: -$OPTARG" >&2
