@@ -56,7 +56,7 @@ RUN cp /usr/src/webservice/runit.d/nginx.run.sh /etc/service/nginx/run &&\
     cp -f /usr/src/webservice/asrservice.nginx.conf /etc/nginx/sites-enabled/default
 
 # Install the the service itself
-RUN cd /usr/src/webservice && pip install --break-system-packages git+https://github.com/m-bain/whisperx.git git+https://github.com/SYSTRAN/faster-whisper.git@v1.0.0 && pip install --break-system-packages . && rm -Rf /usr/src/webservice /root/.cache
+RUN cd /usr/src/webservice && pip install --break-system-packages git+https://github.com/m-bain/whisperx.git && pip install --break-system-packages . && rm -Rf /usr/src/webservice /root/.cache
 RUN ln -s /usr/local/lib/python3.*/dist-packages/clam /opt/clam
 
 VOLUME ["/data"]
