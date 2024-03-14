@@ -156,29 +156,29 @@ PROFILES = [
             multi=True #set unique=True if the user may only upload a file for this input template once. Set multi=True if you the user may upload multiple of such files
         ),
         #------------------------------------------------------------------------------------------------------------------------
-        OutputTemplate('Transcription',PlainTextFormat,'Automatic transcription of the input recording (plain text)',
+        OutputTemplate('Transcription',PlainTextFormat,'Plain text transcriptions without time stamps and speaker attribution',
             SetMetaField('encoding','utf-8'),
             removeextension=".wav",
             extension='.txt',
             multi=True
         ),
-        OutputTemplate('JSON',JSONFormat,'Transcription with full word segmentation/alignment',
+        OutputTemplate('JSON',JSONFormat,'Transcription with full word segmentation/alignment and speaker attribution',
             SetMetaField('encoding','utf-8'),
             removeextension=".wav",
             extension='.json',
             multi=True
         ),
-        OutputTemplate('SRT',SubRipTextFormat,'Timed transcription (srt)',
+        OutputTemplate('SRT',SubRipTextFormat,'Timed transcriptions with speaker attribution (srt)',
             removeextension=".wav",
             extension='.srt',
             multi=True
         ),
-        OutputTemplate('WebVTT',WebVTTFormat,'Timed transcription (WebVTT)',
+        OutputTemplate('WebVTT',WebVTTFormat,'Timed transcriptions with speaker attribution (WebVTT)',
             removeextension=".wav",
             extension='.vtt',
             multi=True
         ),
-        OutputTemplate('TSV', TSVFormat,'Timed transcription (TSV)',
+        OutputTemplate('TSV', TSVFormat,'Timed transcriptions with speaker attribution (TSV)',
             removeextension=".wav",
             extension='.tsv',
             multi=True
@@ -190,29 +190,29 @@ PROFILES = [
             multi=True #set unique=True if the user may only upload a file for this input template once. Set multi=True if you the user may upload multiple of such files
         ),
         #------------------------------------------------------------------------------------------------------------------------
-        OutputTemplate('Transcription',PlainTextFormat,'Automatic transcription of the input recording (plain text)',
+        OutputTemplate('Transcription',PlainTextFormat,'Plain text transcriptions without time stamps and speaker attribution',
             SetMetaField('encoding','utf-8'),
             removeextension=".mp3",
             extension='.txt',
             multi=True
         ),
-        OutputTemplate('JSON',JSONFormat,'Transcription with full word segmentation/alignment',
+        OutputTemplate('JSON',JSONFormat,'Transcription with full word segmentation/alignment and speaker attribution',
             SetMetaField('encoding','utf-8'),
             removeextension=".mp3",
             extension='.json',
             multi=True
         ),
-        OutputTemplate('SRT',SubRipTextFormat,'Timed transcription (srt)',
+        OutputTemplate('SRT',SubRipTextFormat,'Timed transcriptions with speaker attribution (srt)',
             removeextension=".mp3",
             extension='.srt',
             multi=True
         ),
-        OutputTemplate('WebVTT',WebVTTFormat,'Timed transcription (WebVTT)',
+        OutputTemplate('WebVTT',WebVTTFormat,'Timed transcriptions with speaker attribution (WebVTT)',
             removeextension=".mp3",
             extension='.vtt',
             multi=True
         ),
-        OutputTemplate('TSV', TSVFormat,'Timed transcription (TSV)',
+        OutputTemplate('TSV', TSVFormat,'Timed transcriptions with speaker attribution (TSV)',
             removeextension=".mp3",
             extension='.tsv',
             multi=True
