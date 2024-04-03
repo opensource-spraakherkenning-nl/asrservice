@@ -122,7 +122,12 @@ class TSVFormat(CLAMMetaData):
     mimetype = "text/tab-separated-values"
     schemaorg_type = "Dataset"
 
-CUSTOM_FORMATS = [ SubRipTextFormat, WebVTTFormat, TSVFormat]
+class CTMFormat(CLAMMetaData):
+    attributes = {}
+    name = "Conversation Time Marked File"
+    mimetype = "text/plain"
+
+CUSTOM_FORMATS = [ SubRipTextFormat, WebVTTFormat, TSVFormat, CTMFormat]
 
 # CUSTOM_FORMATS = [ MyXMLFormat ]
 
@@ -168,6 +173,12 @@ PROFILES = [
             extension='.json',
             multi=True
         ),
+        OutputTemplate('CTM',CTMFormat,'Transcription with full word segmentation/alignment and speaker attribution',
+            SetMetaField('encoding','utf-8'),
+            removeextension=".wav",
+            extension='.ctm',
+            multi=True
+        ),
         OutputTemplate('SRT',SubRipTextFormat,'Timed transcriptions with speaker attribution (srt)',
             removeextension=".wav",
             extension='.srt',
@@ -200,6 +211,12 @@ PROFILES = [
             SetMetaField('encoding','utf-8'),
             removeextension=".mp3",
             extension='.json',
+            multi=True
+        ),
+        OutputTemplate('CTM',CTMFormat,'Transcription with full word segmentation/alignment and speaker attribution',
+            SetMetaField('encoding','utf-8'),
+            removeextension=".wav",
+            extension='.ctm',
             multi=True
         ),
         OutputTemplate('SRT',SubRipTextFormat,'Timed transcriptions with speaker attribution (srt)',
