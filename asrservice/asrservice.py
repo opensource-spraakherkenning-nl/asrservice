@@ -37,7 +37,7 @@ SYSTEM_DESCRIPTION = "An Automatic Speech Recognition Service for a variety of l
 
 #A version label of the underlying tool and/or this CLAM wrapper
 #(If you can derive this dynamically then that is strongly recommended! It should be the same as in your setup.py)
-SYSTEM_VERSION = 0.1
+SYSTEM_VERSION = 0.2
 
 #The author(s) of the underlying tool and/or this CLAM wrapper
 #(If you can derive this dynamically then that is strongly recommended!)
