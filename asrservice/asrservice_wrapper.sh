@@ -38,7 +38,8 @@ else
     EXTRAPARAMS=""
     echo "HF_TOKEN: Missing" >&2
 fi
-while getopts "l:m:ds:S:" opt "$@"; do
+GPU=0
+while getopts "l:m:ds:S:g" opt "$@"; do
   case $opt in
     l)
         LANGUAGE=$OPTARG;
@@ -57,17 +58,22 @@ while getopts "l:m:ds:S:" opt "$@"; do
         validate "$OPTARG"
         EXTRAPARAMS="$EXTRAPARAMS --max_speakers $OPTARG"
         ;;
+    g)
+        echo "Enabling GPU">&2
+        GPU=1
+        ;;
     \?)
       echo "Invalid option: -$OPTARG" >&2
       ;;
   esac
 done
 
+[ "$GPU" = "0" ] && EXTRAPARAMS="$EXTRAPARAMS --computer_type int8"
 [ -n "$LANGUAGE" ] || die "No language set"
 [ -n "$MODEL" ] || die "No model set"
 
 echo "Processing files" | tee -a "$STATUSFILE"
-whisperx --model "$MODEL" --language "$LANGUAGE" --compute_type int8 $EXTRAPARAMS "$INPUTDIRECTORY/"* || die "ASR system failed"
+whisperx --model "$MODEL" --language "$LANGUAGE" $EXTRAPARAMS "$INPUTDIRECTORY/"* || die "ASR system failed"
 mv ./*.txt "$OUTPUTDIRECTORY/"
 mv ./*.srt "$OUTPUTDIRECTORY/"
 mv ./*.vtt "$OUTPUTDIRECTORY/"
