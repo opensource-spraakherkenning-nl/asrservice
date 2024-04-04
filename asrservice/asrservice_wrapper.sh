@@ -69,7 +69,7 @@ while getopts "l:m:ds:S:g" opt "$@"; do
   esac
 done
 
-[ "$GPU" = "0" ] && EXTRAPARAMS="$EXTRAPARAMS --computer_type int8"
+[ "$GPU" = "0" ] && EXTRAPARAMS="$EXTRAPARAMS --compute_type int8"
 [ -n "$LANGUAGE" ] || die "No language set"
 [ -n "$MODEL" ] || die "No model set"
 
