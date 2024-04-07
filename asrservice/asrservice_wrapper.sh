@@ -78,7 +78,7 @@ whisperx --model "$MODEL" --language "$LANGUAGE" $EXTRAPARAMS "$INPUTDIRECTORY/"
 for f in *.json; do
     base=$(basename "$f")
     if [ "$base" != "*.json" ]; then
-        python "$SCRIPTDIR/json2ctm.py" "$f" > "$OUTPUTDIRECTORY/${base%.json}.ctm"
+        python3 "$SCRIPTDIR/json2ctm.py" "$f" > "$OUTPUTDIRECTORY/${base%.json}.ctm"
     fi
 done
 mv ./*.txt "$OUTPUTDIRECTORY/"
