@@ -77,7 +77,9 @@ echo "Processing files" | tee -a "$STATUSFILE"
 whisperx --model "$MODEL" --language "$LANGUAGE" $EXTRAPARAMS "$INPUTDIRECTORY/"* || die "ASR system failed"
 for f in "$INPUTDIRECTORY"/*.json; do
     base=$(basename "$f")
-    "$SCRIPTDIR/json2ctm.py" "$f" > "$OUTPUTDIRECTORY/${base%.json}.ctm"
+    if [ "$base" != "*.json" ]; then
+        python "$SCRIPTDIR/json2ctm.py" "$f" > "$OUTPUTDIRECTORY/${base%.json}.ctm"
+    fi
 done
 mv ./*.txt "$OUTPUTDIRECTORY/"
 mv ./*.srt "$OUTPUTDIRECTORY/"

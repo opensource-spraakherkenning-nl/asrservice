@@ -24,8 +24,7 @@ for s in data['segments']:
     print(audiofile, end='\t')
     print(channelID, end='\t')
     print(s2['start'], end='\t')
-    print(s2['end'], end='\t')
-    print(s2['text'], end='\t')
-    print(s2['confidence'], end='')
-    print()
+    print(round(s2['end'] - s2['start'],3), end='\t')
+    print(s2['word'], end='\t')
+    print(s2['score'])
   print() # next utterance
