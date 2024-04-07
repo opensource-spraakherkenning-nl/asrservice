@@ -69,13 +69,13 @@ while getopts "l:m:ds:S:g" opt "$@"; do
   esac
 done
 
-[ "$GPU" = "0" ] && EXTRAPARAMS="$EXTRAPARAMS --compute_type int8"
+[ "$GPU" = "0" ] && EXTRAPARAMS="$EXTRAPARAMS --device cpu --compute_type int8"
 [ -n "$LANGUAGE" ] || die "No language set"
 [ -n "$MODEL" ] || die "No model set"
 
 echo "Processing files" | tee -a "$STATUSFILE"
 whisperx --model "$MODEL" --language "$LANGUAGE" $EXTRAPARAMS "$INPUTDIRECTORY/"* || die "ASR system failed"
-for f in "$INPUTDIRECTORY"/*.json; do
+for f in *.json; do
     base=$(basename "$f")
     if [ "$base" != "*.json" ]; then
         python "$SCRIPTDIR/json2ctm.py" "$f" > "$OUTPUTDIRECTORY/${base%.json}.ctm"
