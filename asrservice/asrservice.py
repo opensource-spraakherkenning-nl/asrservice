@@ -173,7 +173,7 @@ PROFILES = [
             extension='.json',
             multi=True
         ),
-        OutputTemplate('CTM',CTMFormat,'Transcription with full word segmentation/alignment and speaker attribution',
+        OutputTemplate('CTM',CTMFormat,'Transcription with full word segmentation/alignment',
             SetMetaField('encoding','utf-8'),
             removeextension=".wav",
             extension='.ctm',

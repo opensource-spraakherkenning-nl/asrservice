@@ -14,14 +14,12 @@ f = open(ifn)
 data = json.load(f)
 f.close()
  
-# no clear idea how to fill in the following fields
-audiofile = 'audiofile'
 channelID = 0
 
 # write out CTM
 for s in data['segments']:
   for s2 in s['words']:
-    print(audiofile, end='\t')
+    print(os.path.basename(ifn).replace(".json",""), end='\t')
     print(channelID, end='\t')
     print(s2['start'], end='\t')
     print(round(s2['end'] - s2['start'],3), end='\t')
