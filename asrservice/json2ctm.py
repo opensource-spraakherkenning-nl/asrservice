@@ -20,7 +20,10 @@ channelID = 0
 for s in data['segments']:
   for s2 in s['words']:
     print(os.path.basename(ifn).replace(".json",""), end='\t')
-    print(channelID, end='\t')
+    if 'speaker' in s2:
+        print(s2['speaker'], end='\t')
+    else:
+        print(channelID, end='\t')
     print(s2['start'], end='\t')
     print(round(s2['end'] - s2['start'],3), end='\t')
     print(s2['word'], end='\t')
