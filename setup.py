@@ -15,7 +15,7 @@ def getreadme():
 
 setup(
     name = "asrservice",
-    version = "0.2", #make sure SYSTEM_VERSION in your service configuration is set to the same value!
+    version = "0.3", #make sure SYSTEM_VERSION in your service configuration is set to the same value!
     author = "Maarten van gompel", #adapt this
     description = ("An Automatic Speech Recognition Service for a variety of languages, powered by WhisperX"), #adapt this with a better (short) description!
     license = "GPL-3.0-or-later",
