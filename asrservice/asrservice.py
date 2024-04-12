@@ -354,7 +354,7 @@ PARAMETERS =  [
     ('Global', [
         ChoiceParameter(id='language',name='Language',description='The language to recognize', choices=[ ('nl','Dutch  / Nederlands'), ('en', 'English'),('de','German / Deutsch'),('fr', 'French / Français'), ('it', 'Italian / Italiano'), ('ja', 'Japanese / 日本語'), ('zh', 'Mandarin Chinese / 普通话'), ('es', 'Spanish / Español'), ('pt', 'Portuguese / Português'), ('uk', 'Ukrainian / Українська') ],default='nl',paramflag='-l'),
         ChoiceParameter(id='model',name='Model',description='The ASR model to use', choices=['tiny','small','medium','large','large-v2', 'large-v3',],default='large-v2',paramflag='-m'),
-        BooleanParameter(id='gpu',name="GPU", description="Use GPU (improves performance but may not always be available)",paramflag="-g")
+        BooleanParameter(id='gpu',name="GPU", description="Use GPU (improves performance but may not always be available)",default=True, paramflag="-g")
     ]),
     ( 'Diarization', [
         BooleanParameter(id='diarization',name="Diarization", description="Enable speaker diarization?",paramflag="-d"),
