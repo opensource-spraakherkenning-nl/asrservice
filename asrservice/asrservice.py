@@ -156,7 +156,7 @@ INTERFACEOPTIONS = "disableliveinput"
 
 PROFILES = [
     Profile(
-        InputTemplate('InputWavFile',WaveAudioFormat,"Wav file",
+        InputTemplate('InputWavFile',WaveAudioFormat,"Wav audio file",
             extension='.wav',
             multi=True #set unique=True if the user may only upload a file for this input template once. Set multi=True if you the user may upload multiple of such files
         ),
@@ -196,7 +196,7 @@ PROFILES = [
         )
     ),
     Profile(
-        InputTemplate('InputMP3File',MP3AudioFormat,"MP3 file",
+        InputTemplate('InputMP3File',MP3AudioFormat,"MP3 audio file",
             extension='.mp3',
             multi=True #set unique=True if the user may only upload a file for this input template once. Set multi=True if you the user may upload multiple of such files
         ),
@@ -235,6 +235,86 @@ PROFILES = [
             multi=True
         )
     ),
+    Profile(
+        InputTemplate('InputMP4File',MP4AudioFormat,"MP4 audio file",
+            extension='.mp4',
+            multi=True #set unique=True if the user may only upload a file for this input template once. Set multi=True if you the user may upload multiple of such files
+        ),
+        #------------------------------------------------------------------------------------------------------------------------
+        OutputTemplate('Transcription',PlainTextFormat,'Plain text transcriptions without time stamps and speaker attribution',
+            SetMetaField('encoding','utf-8'),
+            removeextension=".mp4",
+            extension='.txt',
+            multi=True
+        ),
+        OutputTemplate('JSON',JSONFormat,'Transcription with full word segmentation/alignment and speaker attribution',
+            SetMetaField('encoding','utf-8'),
+            removeextension=".mp4",
+            extension='.json',
+            multi=True
+        ),
+        OutputTemplate('CTM',CTMFormat,'Transcription with full word segmentation/alignment and speaker attribution',
+            SetMetaField('encoding','utf-8'),
+            removeextension=".mp4",
+            extension='.ctm',
+            multi=True
+        ),
+        OutputTemplate('SRT',SubRipTextFormat,'Timed transcriptions with speaker attribution (srt)',
+            removeextension=".mp4",
+            extension='.srt',
+            multi=True
+        ),
+        OutputTemplate('WebVTT',WebVTTFormat,'Timed transcriptions with speaker attribution (WebVTT)',
+            removeextension=".mp4",
+            extension='.vtt',
+            multi=True
+        ),
+        OutputTemplate('TSV', TSVFormat,'Timed transcriptions with speaker attribution (TSV)',
+            removeextension=".mp4",
+            extension='.tsv',
+            multi=True
+        )
+    ),
+    Profile(
+        InputTemplate('InputOggFile',OggAudioFormat,"Ogg audio file",
+            extension='.ogg',
+            multi=True #set unique=True if the user may only upload a file for this input template once. Set multi=True if you the user may upload multiple of such files
+        ),
+        #------------------------------------------------------------------------------------------------------------------------
+        OutputTemplate('Transcription',PlainTextFormat,'Plain text transcriptions without time stamps and speaker attribution',
+            SetMetaField('encoding','utf-8'),
+            removeextension=".ogg",
+            extension='.txt',
+            multi=True
+        ),
+        OutputTemplate('JSON',JSONFormat,'Transcription with full word segmentation/alignment and speaker attribution',
+            SetMetaField('encoding','utf-8'),
+            removeextension=".mp3",
+            extension='.json',
+            multi=True
+        ),
+        OutputTemplate('CTM',CTMFormat,'Transcription with full word segmentation/alignment and speaker attribution',
+            SetMetaField('encoding','utf-8'),
+            removeextension=".ogg",
+            extension='.ctm',
+            multi=True
+        ),
+        OutputTemplate('SRT',SubRipTextFormat,'Timed transcriptions with speaker attribution (srt)',
+            removeextension=".ogg",
+            extension='.srt',
+            multi=True
+        ),
+        OutputTemplate('WebVTT',WebVTTFormat,'Timed transcriptions with speaker attribution (WebVTT)',
+            removeextension=".ogg",
+            extension='.vtt',
+            multi=True
+        ),
+        OutputTemplate('TSV', TSVFormat,'Timed transcriptions with speaker attribution (TSV)',
+            removeextension=".ogg",
+            extension='.tsv',
+            multi=True
+        )
+    )
 ]
 
 # ======== PROJECTS: COMMAND ===========
