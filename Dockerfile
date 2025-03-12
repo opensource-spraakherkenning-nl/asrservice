@@ -1,4 +1,4 @@
-FROM nvidia/cuda:12.3.2-base-ubuntu22.04
+FROM nvidia/cuda:12.6.3-base-ubuntu24.04
 
 LABEL org.opencontainers.image.authors="Maarten van Gompel <proycon@anaproy.nl>"
 LABEL description="An Automatic Speech Recognition webservice powered by WhisperX (ASR) and CLAM (webservice)" 
@@ -56,7 +56,7 @@ RUN cp /usr/src/webservice/runit.d/nginx.run.sh /etc/service/nginx/run &&\
     cp -f /usr/src/webservice/asrservice.nginx.conf /etc/nginx/sites-enabled/default
 
 # Install the the service itself
-RUN cd /usr/src/webservice && pip install git+https://github.com/m-bain/whisperx.git && pip install . && rm -Rf /usr/src/webservice /root/.cache
+RUN cd /usr/src/webservice && pip install --break-system-packages git+https://github.com/m-bain/whisperx.git && pip install --break-system-packages . && rm -Rf /usr/src/webservice /root/.cache
 RUN ln -s /usr/local/lib/python3.*/dist-packages/clam /opt/clam
 
 VOLUME ["/data"]
