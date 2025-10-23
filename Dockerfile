@@ -1,4 +1,4 @@
-FROM nvidia/cuda:12.6.3-base-ubuntu24.04
+FROM nvidia/cuda:12.9.0-base-ubuntu24.04
 
 LABEL org.opencontainers.image.authors="Maarten van Gompel <proycon@anaproy.nl>"
 LABEL description="An Automatic Speech Recognition webservice powered by WhisperX (ASR) and CLAM (webservice)" 
@@ -64,4 +64,5 @@ EXPOSE 80
 WORKDIR /
 
 ENV HOME=/var/www
+RUN python3 -c "import nltk; nltk.download('punkt_tab')"
 ENTRYPOINT ["runsvdir","-P","/etc/service"]

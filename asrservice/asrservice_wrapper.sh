@@ -73,6 +73,9 @@ done
 [ -n "$LANGUAGE" ] || die "No language set"
 [ -n "$MODEL" ] || die "No model set"
 
+#This fits the current Dockerfile but may need to be updated in other contexts:
+export LD_LIBRARY_PATH=/usr/local/lib/python3.12/dist-packages/nvidia/cudnn/lib
+
 echo "Processing files" | tee -a "$STATUSFILE"
 whisperx --model "$MODEL" --language "$LANGUAGE" $EXTRAPARAMS "$INPUTDIRECTORY/"* || die "ASR system failed"
 for f in *.json; do
