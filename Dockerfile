@@ -27,7 +27,7 @@ ENV HF_TOKEN=""
 #^-- Set to your huggingface token
 
 # Install all global dependencies
-RUN apt-get update && apt-get install -y --no-install-recommends runit curl ca-certificates nginx uwsgi uwsgi-plugin-python3 python3-pip python3-yaml python3-lxml python3-requests ffmpeg zip git
+RUN apt-get update && apt-get install -y --no-install-recommends runit curl ca-certificates nginx uwsgi uwsgi-plugin-python3 python3-pip python3-lxml python3-requests ffmpeg zip git
 
 # Prepare environment
 RUN mkdir -p /etc/service/nginx /etc/service/uwsgi /var/www/.cache /var/www/.config && chown www-data:www-data /var/www/.cache /var/www/.config

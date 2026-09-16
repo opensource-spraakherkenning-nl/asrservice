@@ -37,7 +37,7 @@ SYSTEM_DESCRIPTION = "An Automatic Speech Recognition Service for a variety of l
 
 #A version label of the underlying tool and/or this CLAM wrapper
 #(If you can derive this dynamically then that is strongly recommended! It should be the same as in your setup.py)
-SYSTEM_VERSION = "0.3.1"
+SYSTEM_VERSION = "0.3.2"
 
 #The author(s) of the underlying tool and/or this CLAM wrapper
 #(If you can derive this dynamically then that is strongly recommended!)
@@ -352,7 +352,7 @@ COMMAND = WEBSERVICEDIR + "/asrservice_wrapper.sh $STATUSFILE $INPUTDIRECTORY $O
 
 PARAMETERS =  [
     ('Global', [
-        ChoiceParameter(id='language',name='Language',description='The language to recognize', choices=[ ('nl','Dutch  / Nederlands'), ('en', 'English'),('de','German / Deutsch'),('fr', 'French / Français'), ('it', 'Italian / Italiano'), ('ja', 'Japanese / 日本語'), ('zh', 'Mandarin Chinese / 普通话'), ('es', 'Spanish / Español'), ('pt', 'Portuguese / Português'), ('uk', 'Ukrainian / Українська') ],default='nl',paramflag='-l'),
+        ChoiceParameter(id='language',name='Language',description='The language to recognize', choices=[ ('nl','Dutch  / Nederlands'), ('en', 'English'),('de','German / Deutsch'),('el', 'Greek / Ελληνικά'), ('fr', 'French / Français'), ('it', 'Italian / Italiano'), ('ja', 'Japanese / 日本語'), ('zh', 'Mandarin Chinese / 普通话'), ('es', 'Spanish / Español'), ('pt', 'Portuguese / Português'), ('uk', 'Ukrainian / Українська') ],default='nl',paramflag='-l'),
         ChoiceParameter(id='model',name='Model',description='The ASR model to use', choices=['tiny','small','medium','large','large-v2', 'large-v3',],default='large-v2',paramflag='-m'),
         BooleanParameter(id='gpu',name="GPU", description="Use GPU (improves performance but may not always be available)",default=True, paramflag="-g")
     ]),
