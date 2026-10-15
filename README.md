@@ -1,7 +1,8 @@
 # Automatic Speech Recognition Service
 
 This repository contains a Automatic Speech Recognition webservice for a variety of languages (including Dutch and English).
-The ASR is powered by [WhisperX](https://github.com/m-bain/whisperX) and the webservice is powered by [CLAM](https://proycon.github.io/clam/). This webservice is developed at the Centre of Language and Speech Technology, Radboud University, Nijmegen.
+The ASR is powered by [WhisperX](https://github.com/m-bain/whisperX) and the webservice is powered by [CLAM](https://proycon.codeberg.org/clam/).
+This webservice is developed at the Centre of Language and Speech Technology, Radboud University, Nijmegen.
 
 ## Installation
 

@@ -1,5 +1,0 @@
-include README*
-include asrservice/*.py
-include asrservice/*.sh
-include asrservice/*.wsgi
-include asrservice/*.yml

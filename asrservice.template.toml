@@ -1,0 +1,202 @@
+
+#Note: Certain values in this TOML reference environment variables. If you see such variables (dollar syntax), it means
+#      this file is still a template that needs to be passed through envsubst first before being accepted by CLAM.
+
+name = "Automatic Speech Recognition Service"
+summary = "Multilingual speech recognition and speaker diarisation via WhisperX"
+description = "This webservice allows you to automatically transcribe audio files, it supports a variety of languages and is powered by WhisperX"
+authors = [ "Maarten van Gompel" ]
+affiliation = "CLST, Radboud University"
+termsofservice = "$CLAM_TERMS_OF_SERVICE"
+listen = "$CLAM_LISTEN"
+#url is required if oauth is enabled, it must not have a trailing slash
+url = "$CLAM_URL"
+rootdir = "./data"
+version = "0.4"
+
+[license]
+name = "GNU Affero General Public License"
+id = "AGPL-3.0-only"
+url = "https://www.gnu.org/licenses/agpl-3.0.en.html"
+
+[contact]
+name = "Maarten van Gompel"
+url = "https://proycon.anaproy.nl"
+email = "proycon@anaproy.nl"
+
+user_file = "$CLAM_USER_FILE"
+oauth_config_file = "$CLAM_OAUTH_CONFIG_FILE"
+
+[[filetypes]]
+id = "txt"
+name = "Plain Text (UTF-8)"
+contenttype = "text/plain; charset=utf-8"
+
+[[filetypes]]
+id = "wav"
+name = "Wave Audio"
+contenttype = "audio/wav"
+
+[[filetypes]]
+id = "mp3"
+name = "MP3 Audio"
+contenttype = "audio/mpeg"
+
+[[filetypes]]
+id = "Ogg"
+name = "Ogg Audio"
+contenttype = "audio/ogg"
+
+[[filetypes]]
+id = "srt"
+name = "SubRip Text"
+contenttype = "application/x-subrip"
+
+[[filetypes]]
+id = "tsv"
+name = "Tab Separated Values"
+contenttype = "text/tab-separated-values"
+
+[[filetypes]]
+id = "ctm"
+name = "Conversation Time Marked Text"
+contenttype = "text/plain"
+
+[[filetypes]]
+id = "vtt"
+name = "WebVTT"
+contenttype = "text/plain"
+
+[[filetypes]]
+id = "json"
+name = "JSON"
+contenttype = "application/json"
+
+#---------------------------------------------------------------------------------
+
+[[background_services]]
+id = "asrserver-nl"
+description = "Dutch Speech Recognition"
+command = "asrserver"
+args = [ "$CLAM_ASR_MODEL", "$CLAM_DEVICE_TYPE", "$CLAM_PRECISION", "11001", "nl" ]
+unload_time = 120
+ready_pattern = "READY.*" #the server sends this if it's ready to receive connections
+
+[[background_services]]
+id = "asrserver-en"
+description = "English Speech Recognition"
+command = "asrserver"
+args = [ "$CLAM_ASR_MODEL", "$CLAM_DEVICE_TYPE", "$CLAM_PRECISION", "11002", "en" ]
+unload_time = 120
+ready_pattern = "READY.*"
+
+#---------------------------------------------------------------------------------
+
+[[endpoints]]
+name = "landingpage"
+path = "/"
+mode = "LandingPage"
+public = true
+
+#----------------------------------- DUTCH ASR ----------------------------------------------
+
+[[endpoints]]
+name = "Dutch Speech Recognition"
+description = "Transcribe dutch texts"
+path = "/nl"  #project name will be appended automatically
+mode = "Project"
+status_pattern = ".*" #every line from stderr qualifies as a status message
+command = "asrserver"
+args = [ "-p", "11001" ]
+#automatically add arguments from the defined parameters
+auto_add_args = true
+public = false
+
+[[endpoints.parameters]]
+id = "diarization"
+name = "Diarization"
+description = "Enable diarization (speaker recognition). Note that this has a performance impact so if you don't need it you can best leave it off."
+required = false
+type = { parametertype = "Bool", default = false }
+flag = "-b"
+
+[[endpoints.parameters]]
+id = "return_char_alignments"
+name = "Return character alignments"
+description = "Returns alignments on a character level"
+required = false
+type = { parametertype = "Bool", default = false }
+flag = "-c"
+
+[[endpoints.parameters]]
+id = "minspeakers"
+name = "Minimum number of speakers"
+description = "Setting this helps diarization"
+required = false
+type = { parametertype = "Int" }
+flag = "-m"
+
+[[endpoints.parameters]]
+id = "minspeakers"
+name = "Maximum number of speakers"
+description = "Setting this helps diarization"
+required = false
+type = { parametertype = "Int" }
+flag = "-M"
+
+[[endpoints.parameters]]
+id = "inputwav"
+name = "Input audio (Wav)"
+description = "The file to be transcribed"
+required = true
+type = { parametertype = "File", filetype = "wav", filename = { nametype = "Pattern", value = "\\.wav$" } }
+multiple = true
+
+[[endpoints.parameters]]
+id = "inputmp3"
+name = "Input audio (Mp3)"
+description = "The file to be transcribed"
+required = true
+type = { parametertype = "File", filetype = "mp4", filename = { nametype = "Pattern", value = "\\.mp3$" } }
+multiple = true
+
+[[endpoints.parameters]]
+id = "inputogg"
+name = "Input audio (Ogg)"
+description = "The file to be transcribed"
+required = true
+type = { parametertype = "File", filetype = "ogg", filename = { nametype = "Pattern", value = "\\.ogg$" } }
+multiple = true
+
+[[endpoints.outputfiles]]
+name = "Transcription Only"
+type = "txt"
+filename = { nametype = "Pattern", value = "\\.txt$" }
+
+[[endpoints.outputfiles]]
+name = "Timed transcription (with speaker attribution)"
+type = "srt"
+filename = { nametype = "Pattern", value = "\\.srt$" }
+
+[[endpoints.outputfiles]]
+name = "Timed transcription (with speaker attribution)"
+type = "tsv"
+filename = { nametype = "Pattern", value = "\\.tsv$" }
+
+[[endpoints.outputfiles]]
+name = "Timed transcription (with speaker attribution)"
+type = "ctm"
+filename = { nametype = "Pattern", value = "\\.ctm$" }
+
+[[endpoints.outputfiles]]
+name = "Timed transcription (with speaker attribution)"
+type = "vtt"
+filename = { nametype = "Pattern", value = "\\.vtt$" }
+
+[[endpoints.outputfiles]]
+name = "Timed transcription (with speaker attribution)"
+type = "json"
+filename = { nametype = "Pattern", value = "\\.json$" }
+
+#---------------------------------------------------------------------------------
+

@@ -1,0 +1,35 @@
+[project]
+name = "asrserver"
+version = "0.4.0"
+description = "WhisperX-powered ASR background server for use with CLAM"
+authors = [
+    {name = "Maarten van Gompel", email = "proycon@anaproy.nl"}
+]
+maintainers = [
+    {name = "Maarten van Gompel", email = "proycon@anaproy.nl"}
+]
+dynamic = ["dependencies"]
+readme = "README.md"
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Intended Audience :: Developers",
+]
+license = "GPL-3.0-only"
+requires-python = ">= 3.12"
+
+[project.urls]
+Repository = "https://github.com/proycon/asrservice.git"
+
+[project.scripts]
+asrserver = "asrserver:main"
+
+[tool.setuptools]
+py-modules = [ "asrserver" ]
+
+[tool.setuptools.dynamic]
+dependencies = {file = ["requirements.txt"]}
+
+[build-system]
+requires = ["setuptools >= 62.6"]
+build-backend = "setuptools.build_meta"
+
