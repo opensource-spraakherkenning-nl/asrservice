@@ -43,7 +43,7 @@ name = "MP3 Audio"
 contenttype = "audio/mpeg"
 
 [[filetypes]]
-id = "Ogg"
+id = "ogg"
 name = "Ogg Audio"
 contenttype = "audio/ogg"
 
@@ -157,7 +157,7 @@ id = "inputmp3"
 name = "Input audio (Mp3)"
 description = "The file to be transcribed"
 required = true
-type = { parametertype = "File", filetype = "mp4", filename = { nametype = "Pattern", value = "\\.mp3$" } }
+type = { parametertype = "File", filetype = "mp3", filename = { nametype = "Pattern", value = "\\.mp3$" } }
 multiple = true
 
 [[endpoints.parameters]]

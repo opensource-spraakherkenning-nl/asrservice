@@ -1,5 +1,6 @@
 # read environment variables from external FILE
 ENV_FILE ?= local.env
+include $(ENV_FILE)
 export $(shell sed '/^\#/d; s/=.*//' $(ENV_FILE))
 
 .PHONY: all
