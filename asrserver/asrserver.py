@@ -86,7 +86,7 @@ def process(filename: str, diarize: bool, min_speakers: int, max_speakers: int, 
 
 def client_handler(conn):
     """Handle incoming client connections"""
-    conn.settimeout(0.5)
+    conn.settimeout(2)
     try:
         with conn:
             while not terminate.is_set():
@@ -94,7 +94,7 @@ def client_handler(conn):
                 if not data:
                     break
                 try:
-                    filename, diarize, minspeakers,maxspeakers, return_char_alignments, outputdir = str(data,'utf-8').split("\t")
+                    filename, diarize, minspeakers,maxspeakers, return_char_alignments, outputdir = str(data,'utf-8').strip().split("\t")
                 except:
                     conn.sendall(b"ERROR: Expected tab-separated fields: filename, diarize (0 or 1), minspeakers, maxspeakers, return_char_alignments (0 or 1), outputdir\n")
                     continue
@@ -107,6 +107,10 @@ def client_handler(conn):
                 except Exception as e:
                     traceback.print_exc()
                     conn.sendall(f"ERROR: {e}".encode('utf-8') + b"\n")
+                #important, send EOF and close connection, client may only send one instruction per connection
+                conn.shutdown(socket.SHUT_RDWR)
+                conn.close()
+                return
     except OSError as e:
         print(f"Client connection ended: {e}", file=sys.stderr)
 

@@ -35,7 +35,7 @@ fi
 
 for f in "$@"; do
     f="$(realpath "$f")"
-    printf "%s\t%s\t%s\t%s\t%s\t%s"  "$f" "$diarize" "$minspeakers" "$maxspeakers" "$charalign" "$outputdir" | socat -t 2 - "tcp:localhost:$port" >&2
+    printf "%s\t%s\t%s\t%s\t%s\t%s\n"  "$f" "$diarize" "$minspeakers" "$maxspeakers" "$charalign" "$outputdir" | nc localhost "$port" >&2
 done
 
 echo "Done...">&2
