@@ -4,13 +4,12 @@ diarize=0
 minspeakers=0
 maxspeakers=0
 charalign=0
-outputdir=
+outputdir=$(realpath .)
 
-while getopts "dcmMpo:" opt; do
+while getopts "dcm:M:p:o:" opt; do
     case $opt in
         d) diarize=1 ;;
         c) charalign=1 ;;
-        o) outputdir=$OPTARG ;;
         m) minspeakers=$OPTARG ;;
         M) maxspeakers=$OPTARG ;;
         p) port=$OPTARG ;;
@@ -29,7 +28,14 @@ if [ -z "$outputdir" ]  || [ ! -d "$outputdir" ]; then
     exit 2
 fi
 
+if [ $# -eq 0 ]; then
+    echo "ERROR: No input files provided...">&2
+    exit 2
+fi
+
 for f in "$@"; do
     f="$(realpath "$f")"
     printf "%s\t%s\t%s\t%s\t%s\t%s"  "$f" "$diarize" "$minspeakers" "$maxspeakers" "$charalign" "$outputdir" | socat -t 2 - "tcp:localhost:$port" >&2
 done
+
+echo "Done...">&2

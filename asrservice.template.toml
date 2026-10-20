@@ -77,18 +77,18 @@ contenttype = "application/json"
 [[background_services]]
 id = "asrserver-nl"
 description = "Dutch Speech Recognition"
-command = "asrserver"
+command = "./bgservice_wrapper.sh"
 args = [ "$CLAM_ASR_MODEL", "$CLAM_DEVICE_TYPE", "$CLAM_PRECISION", "11001", "nl" ]
 unload_time = 120
-ready_pattern = "READY.*" #the server sends this if it's ready to receive connections
+up_pattern = "READY.*" #the server sends this if it's ready to receive connections
 
 [[background_services]]
 id = "asrserver-en"
 description = "English Speech Recognition"
-command = "asrserver"
+command = "./bgservice_wrapper.sh"
 args = [ "$CLAM_ASR_MODEL", "$CLAM_DEVICE_TYPE", "$CLAM_PRECISION", "11002", "en" ]
 unload_time = 120
-ready_pattern = "READY.*"
+up_pattern = "READY.*"
 
 #---------------------------------------------------------------------------------
 
@@ -105,10 +105,11 @@ name = "Dutch Speech Recognition"
 description = "Transcribe dutch texts"
 path = "/nl"  #project name will be appended automatically
 mode = "Project"
+background_services = [ "asrserver-nl" ]
 status_pattern = ".*" #every line from stderr qualifies as a status message
-command = "asrserver"
+command = "./asrservice_wrapper.sh"
 args = [ "-p", "11001" ]
-#automatically add arguments from the defined parameters
+#automatically add arguments from the defined parameters on top of args
 auto_add_args = true
 public = false
 
@@ -118,7 +119,7 @@ name = "Diarization"
 description = "Enable diarization (speaker recognition). Note that this has a performance impact so if you don't need it you can best leave it off."
 required = false
 type = { parametertype = "Bool", default = false }
-flag = "-b"
+flag = "-d"
 
 [[endpoints.parameters]]
 id = "return_char_alignments"
@@ -148,7 +149,7 @@ flag = "-M"
 id = "inputwav"
 name = "Input audio (Wav)"
 description = "The file to be transcribed"
-required = true
+required = false
 type = { parametertype = "File", filetype = "wav", filename = { nametype = "Pattern", value = "\\.wav$" } }
 multiple = true
 
@@ -156,7 +157,7 @@ multiple = true
 id = "inputmp3"
 name = "Input audio (Mp3)"
 description = "The file to be transcribed"
-required = true
+required = false
 type = { parametertype = "File", filetype = "mp3", filename = { nametype = "Pattern", value = "\\.mp3$" } }
 multiple = true
 
@@ -164,7 +165,7 @@ multiple = true
 id = "inputogg"
 name = "Input audio (Ogg)"
 description = "The file to be transcribed"
-required = true
+required = false
 type = { parametertype = "File", filetype = "ogg", filename = { nametype = "Pattern", value = "\\.ogg$" } }
 multiple = true
 

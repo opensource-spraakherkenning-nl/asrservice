@@ -96,17 +96,17 @@ def client_handler(conn):
                 try:
                     filename, diarize, minspeakers,maxspeakers, return_char_alignments, outputdir = str(data,'utf-8').split("\t")
                 except:
-                    conn.sendall(b"ERROR: Expected tab-separated fields: filename, diarize (0 or 1), minspeakers, maxspeakers, return_char_alignments (0 or 1), outputdir")
+                    conn.sendall(b"ERROR: Expected tab-separated fields: filename, diarize (0 or 1), minspeakers, maxspeakers, return_char_alignments (0 or 1), outputdir\n")
                     continue
                 try:
-                    conn.sendall(b"Processing " + os.path.basename(filename).encode('utf-8') + b" ...")
+                    conn.sendall(b"Processing " + os.path.basename(filename).encode('utf-8') + b" ...\n")
                     if process(filename, diarize == "1", int(minspeakers), int(maxspeakers), return_char_alignments == "1", outputdir):
-                        conn.sendall(b"Finished " + os.path.basename(filename).encode('utf-8') )
+                        conn.sendall(b"Finished " + os.path.basename(filename).encode('utf-8') + b"\n")
                     else:
-                        conn.sendall(b"ERROR: Invalid file or file not found")
+                        conn.sendall(b"ERROR: Invalid file or file not found\n")
                 except Exception as e:
                     traceback.print_exc()
-                    conn.sendall(f"ERROR: {e}".encode('utf-8'))
+                    conn.sendall(f"ERROR: {e}".encode('utf-8') + b"\n")
     except OSError as e:
         print(f"Client connection ended: {e}", file=sys.stderr)
 

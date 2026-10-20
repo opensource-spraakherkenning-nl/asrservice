@@ -12,6 +12,7 @@ install-dependencies deps: asrserver/requirements.txt
 	@command -v rustc || (echo "Missing dependency: rustc">&2 && false)
 	@command -v curl || (echo "Missing dependency: curl">&2 && false)
 	@command -v python3 || (echo "Missing dependency: python3">&2 && false)
+	@command -v socat || (echo "Missing dependency: socat">&2 && false)
 	@command -v envsubst || (echo "Missing dependency: envsubst (On Debian/Ubuntu: apt install gettext-base)">&2 && false)
 	@command -v clam > /dev/null || cargo install --git https://codeberg.org/proycon/clam --branch clam-4.0 || (echo "Failed to install clam">&2 && false)
 ifeq ($(GLOBAL_ENV),1)
