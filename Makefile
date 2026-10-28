@@ -6,6 +6,10 @@ export $(shell sed '/^\#/d; s/=.*//' $(ENV_FILE))
 .PHONY: all
 all: install-dependencies asrservice.toml
 
+.PHONY: clean
+clean:
+	rm -f asrservice.toml
+
 .PHONY: install-dependencies deps
 install-dependencies deps: asrserver/requirements.txt
 	@command -v cargo || (echo "Missing dependency: cargo)">&2 && false)
@@ -34,5 +38,5 @@ asrservice.toml: asrservice.template.toml
 
 .PHONY: docker
 docker:
-	docker build -t proycon/asrservice .
+	docker build -t proycon/asrservice:dev .
 

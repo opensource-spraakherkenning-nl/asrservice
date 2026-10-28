@@ -11,7 +11,7 @@ termsofservice = "$CLAM_TERMS_OF_SERVICE"
 listen = "$CLAM_LISTEN"
 #url is required if oauth is enabled, it must not have a trailing slash
 url = "$CLAM_URL"
-rootdir = "./data"
+rootdir = "$CLAM_ROOT"
 version = "0.4"
 
 [license]

@@ -1,8 +1,11 @@
+asrservice.toml
 __pycache__/
 *.py[cod]
 build/
 dist/
 userdata/
+data/
+model/
 *.log
 *.egg
 *.egg-info
