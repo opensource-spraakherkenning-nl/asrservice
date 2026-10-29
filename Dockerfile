@@ -39,7 +39,7 @@ ENV HOME=/var/webservice
 WORKDIR /var/webservice
 
 # Install the service itself and cleanup unneeded sources afterwards
-RUN cd /var/webservice && GLOBAL_ENV=1 make install-dependencies && chown 1000:1000 /var/webservice && rm -Rf /var/webservice/asrserver /root/.cache /root/.cargo && apt-get remove -y cargo
+RUN cd /var/webservice && GLOBAL_ENV=1 make install-dependencies && chown 1000:1000 /var/webservice && rm -Rf /var/webservice/asrserver /var/webservice/local.env /root/.cache /root/.cargo && apt-get remove -y cargo
 
 VOLUME ["/data"]
 EXPOSE 8080
