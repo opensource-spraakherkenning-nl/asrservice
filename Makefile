@@ -1,8 +1,10 @@
 # read environment variables from external FILE
-ifneq ($(INCLUDE_ENV),0)
+ifneq ($(GLOBAL_ENV),1)
 ENV_FILE ?= local.env
+ifneq ($(ENV_FILE),/dev/null)
 include $(ENV_FILE)
 export $(shell sed '/^\#/d; s/=.*//' $(ENV_FILE))
+endif
 endif
 
 .PHONY: all
@@ -10,7 +12,7 @@ all: install-dependencies asrservice.toml
 
 .PHONY: clean
 clean:
-	rm -f asrservice.toml env
+	rm -Rf asrservice.toml env
 
 .PHONY: install-dependencies deps
 install-dependencies deps: asrserver/requirements.txt

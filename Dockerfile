@@ -29,21 +29,21 @@ RUN apt-get update && \
     pip install --break-system-packages git+https://github.com/Andrej730/whisperX@support-python-3.14 #this is temporary until whisperX > 3.8.6 is released, clam from git is also temporary until 4.0 is released on crates.io
 
 # Add the sources of this webservice
-COPY . /usr/src/webservice
+COPY . /var/webservice
 
 ENV XDG_CACHE_DIR=/var/cache
 ENV XDG_CONFIG_DIR=/var/cache
 ENV TRANSFORMERS_CACHE=/var/cache
 ENV HF_HOME=/var/cache
-ENV HOME=/usr/src/webservice
-WORKDIR /usr/src/webservice
+ENV HOME=/var/webservice
+WORKDIR /var/webservice
 
 # Install the service itself and cleanup unneeded sources afterwards
-RUN cd /usr/src/webservice && GLOBAL_ENV=1 make clean all && rm -Rf /usr/src/webservice/asrserver /root/.cache /root/.cargo && apt-get remove -y cargo
+RUN cd /var/webservice && GLOBAL_ENV=1 make install-dependencies && chown 1000:1000 /var/webservice && rm -Rf /var/webservice/asrserver /root/.cache /root/.cargo && apt-get remove -y cargo
 
 VOLUME ["/data"]
 EXPOSE 8080
 
 RUN python3 -c "import nltk; nltk.download('punkt_tab')"
 USER 1000
-ENTRYPOINT ["/usr/bin/clam","--config","asrservice.toml"]
+ENTRYPOINT ["./entrypoint.sh"]
