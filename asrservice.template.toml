@@ -24,6 +24,7 @@ name = "Maarten van Gompel"
 url = "https://proycon.anaproy.nl"
 email = "proycon@anaproy.nl"
 
+[auth]
 user_file = "$CLAM_USER_FILE"
 oauth_config_file = "$CLAM_OAUTH_CONFIG_FILE"
 
