@@ -3,7 +3,6 @@
 #      this file is still a template that needs to be passed through envsubst first before being accepted by CLAM.
 
 name = "Automatic Speech Recognition Service"
-summary = "Multilingual speech recognition and speaker diarisation via WhisperX"
 description = "This webservice allows you to automatically transcribe audio files, it supports a variety of languages and is powered by WhisperX"
 authors = [ "Maarten van Gompel" ]
 affiliation = "CLST, Radboud University"
