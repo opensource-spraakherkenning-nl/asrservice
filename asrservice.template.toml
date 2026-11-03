@@ -26,7 +26,7 @@ email = "proycon@anaproy.nl"
 [auth]
 user_file = "$CLAM_USER_FILE"
 salt = "$CLAM_SALT"
-oauth_config_file = "$CLAM_OAUTH_CONFIG_FILE"
+oauth_config_file = "$CLAM_OIDC_CONFIG_FILE"
 
 [[filetypes]]
 id = "txt"

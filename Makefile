@@ -25,6 +25,7 @@ install-dependencies deps: asrserver/requirements.txt
 	@command -v clam > /dev/null || cargo install --git https://codeberg.org/proycon/clam --branch clam-4.0 || (echo "Failed to install clam">&2 && false)
 ifeq ($(GLOBAL_ENV),1)
 	python3 -m pip install --break-system-packages -r $<
+	cd asrserver && pip install --break-system-packages .
 else
 	$(MAKE) env
 endif
@@ -34,7 +35,7 @@ env: asrserver/requirements.txt
 	[ ! -d env ] && python3 -m venv env \
 		&& . env/bin/activate \
 		&& pip install --upgrade pip \
-		&& pip install -r $<
+		&& pip install -r $< && cd asrserver && pip install .
 
 asrservice.toml: asrservice.template.toml
 	envsubst < $< >$@
