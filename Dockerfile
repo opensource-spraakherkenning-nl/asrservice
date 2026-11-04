@@ -19,6 +19,9 @@ ENV CLAM_ROOT="./data"
 ENV CLAM_LISTEN="0.0.0.0:8080"
 ENV CLAM_TERMS_OF_SERVICE=""
 
+# You can use this to set extra parameters to CLAM like --debug
+ENV CLAM_EXTRA=""
+
 #Set this to your huggingface token
 ENV HF_TOKEN=""
 
