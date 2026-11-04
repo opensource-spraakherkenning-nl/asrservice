@@ -43,5 +43,9 @@ asrservice.toml: asrservice.template.toml
 
 .PHONY: docker
 docker:
+	docker build -t proycon/asrservice:latest .
+
+.PHONY: docker
+docker-dev:
 	docker build -t proycon/asrservice:dev .
 
