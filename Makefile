@@ -45,7 +45,12 @@ asrservice.toml: asrservice.template.toml
 docker:
 	docker build -t proycon/asrservice:latest .
 
-.PHONY: docker
+.PHONY: docker-dev
 docker-dev:
 	docker build -t proycon/asrservice:dev .
+
+.PHONY: run
+run: asrservice.toml | install-dependencies
+	clam --config $< $(CLAM_EXTRA)
+
 
