@@ -51,6 +51,10 @@ docker-dev:
 
 .PHONY: run
 run: asrservice.toml | install-dependencies
+ifeq ($(GLOBAL_ENV),1)
 	clam --config $< $(CLAM_EXTRA)
+else
+	. env/bin/activate && exec clam --config $< $(CLAM_EXTRA)
+endif
 
 
