@@ -788,7 +788,7 @@ name = "Japanese Speech Recognition"
 description = "Transcribe japanese texts"
 path = "/ja"  #project name will be appended automatically
 mode = "Project"
-background_services = [ "asrserver-it" ]
+background_services = [ "asrserver-ja" ]
 status_pattern = ".*" #every line from stderr qualifies as a status message
 command = "./asrservice_wrapper.sh"
 args = [ "-p", "11007" ]
@@ -887,7 +887,7 @@ filename = { nametype = "Pattern", value = "\\.json$" }
 [[endpoints]]
 name = "Mandarin Chinesed Speech Recognition"
 description = "Transcribe chinese texts"
-path = "/it"  #project name will be appended automatically
+path = "/zh"  #project name will be appended automatically
 mode = "Project"
 background_services = [ "asrserver-zh" ]
 status_pattern = ".*" #every line from stderr qualifies as a status message
