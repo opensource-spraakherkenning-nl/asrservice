@@ -34,19 +34,20 @@ RUN apt-get update && \
 # Add the sources of this webservice
 COPY . /var/webservice
 
-ENV XDG_CACHE_DIR=/var/cache
-ENV XDG_CONFIG_DIR=/var/cache
-ENV TRANSFORMERS_CACHE=/var/cache
-ENV HF_HOME=/var/cache
+ENV XDG_CACHE_DIR=/var/webservice/.cache
+ENV XDG_CONFIG_DIR=/var/webservice/.cache
+ENV TRANSFORMERS_CACHE=/var/webservice/.cache
+ENV MPLCONFIGDIR=/var/webservice/.cache
+ENV HF_HOME=/var/webservice/.cache
 ENV HOME=/var/webservice
 WORKDIR /var/webservice
 
-# Install the service itself and cleanup unneeded sources afterwards
-RUN cd /var/webservice && GLOBAL_ENV=1 make install-dependencies && chown 1000:1000 /var/webservice && rm -Rf /var/webservice/asrserver /var/webservice/local.env /root/.cache /root/.cargo && apt-get remove -y cargo
+# Install the service itself, set permissions, and cleanup unneeded sources afterwards
+RUN cd /var/webservice && GLOBAL_ENV=1 make install-dependencies && mkdir -p /var/www/webservice/.cache && chown 1000:1000 /var/webservice /var/webservice/.cache && rm -Rf /var/webservice/asrserver /var/webservice/local.env /var/webservice/.cache/pip /root/.cache /root/.cargo && apt-get remove -y cargo
 
 VOLUME ["/data"]
 EXPOSE 8080
 
 RUN python3 -c "import nltk; nltk.download('punkt_tab')"
-USER 1000
+USER ubuntu
 ENTRYPOINT ["./entrypoint.sh"]

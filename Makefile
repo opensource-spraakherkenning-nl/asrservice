@@ -57,4 +57,12 @@ else
 	. env/bin/activate && exec clam --config $< $(CLAM_EXTRA)
 endif
 
+.PHONY: check
+check: asrservice.toml | install-dependencies
+ifeq ($(GLOBAL_ENV),1)
+	clam --check --config $< $(CLAM_EXTRA)
+else
+	. env/bin/activate && exec clam --check --config $< $(CLAM_EXTRA)
+endif
+
 
