@@ -91,6 +91,78 @@ args = [ "$CLAM_ASR_MODEL", "$CLAM_DEVICE_TYPE", "$CLAM_PRECISION", "11002", "en
 unload_time = 120
 up_pattern = "READY.*"
 
+[[background_services]]
+id = "asrserver-de"
+description = "German Speech Recognition"
+command = "./bgservice_wrapper.sh"
+args = [ "$CLAM_ASR_MODEL", "$CLAM_DEVICE_TYPE", "$CLAM_PRECISION", "11003", "de" ]
+unload_time = 120
+up_pattern = "READY.*"
+
+[[background_services]]
+id = "asrserver-el"
+description = "Greek Speech Recognition"
+command = "./bgservice_wrapper.sh"
+args = [ "$CLAM_ASR_MODEL", "$CLAM_DEVICE_TYPE", "$CLAM_PRECISION", "11004", "el" ]
+unload_time = 120
+up_pattern = "READY.*"
+
+[[background_services]]
+id = "asrserver-fr"
+description = "French Speech Recognition"
+command = "./bgservice_wrapper.sh"
+args = [ "$CLAM_ASR_MODEL", "$CLAM_DEVICE_TYPE", "$CLAM_PRECISION", "11005", "fr" ]
+unload_time = 120
+up_pattern = "READY.*"
+
+[[background_services]]
+id = "asrserver-it"
+description = "Italian Speech Recognition"
+command = "./bgservice_wrapper.sh"
+args = [ "$CLAM_ASR_MODEL", "$CLAM_DEVICE_TYPE", "$CLAM_PRECISION", "11006", "it" ]
+unload_time = 120
+up_pattern = "READY.*"
+
+[[background_services]]
+id = "asrserver-ja"
+description = "Japanese Speech Recognition"
+command = "./bgservice_wrapper.sh"
+args = [ "$CLAM_ASR_MODEL", "$CLAM_DEVICE_TYPE", "$CLAM_PRECISION", "11007", "ja" ]
+unload_time = 120
+up_pattern = "READY.*"
+
+[[background_services]]
+id = "asrserver-zh"
+description = "Mandarin Chinese Speech Recognition"
+command = "./bgservice_wrapper.sh"
+args = [ "$CLAM_ASR_MODEL", "$CLAM_DEVICE_TYPE", "$CLAM_PRECISION", "11008", "zh" ]
+unload_time = 120
+up_pattern = "READY.*"
+
+[[background_services]]
+id = "asrserver-es"
+description = "Spanish Speech Recognition"
+command = "./bgservice_wrapper.sh"
+args = [ "$CLAM_ASR_MODEL", "$CLAM_DEVICE_TYPE", "$CLAM_PRECISION", "11009", "es" ]
+unload_time = 120
+up_pattern = "READY.*"
+
+[[background_services]]
+id = "asrserver-pt"
+description = "Portuguese Speech Recognition"
+command = "./bgservice_wrapper.sh"
+args = [ "$CLAM_ASR_MODEL", "$CLAM_DEVICE_TYPE", "$CLAM_PRECISION", "11010", "pt" ]
+unload_time = 120
+up_pattern = "READY.*"
+
+[[background_services]]
+id = "asrserver-uk"
+description = "Ukrainian Speech Recognition"
+command = "./bgservice_wrapper.sh"
+args = [ "$CLAM_ASR_MODEL", "$CLAM_DEVICE_TYPE", "$CLAM_PRECISION", "11011", "uk" ]
+unload_time = 120
+up_pattern = "READY.*"
+
 #---------------------------------------------------------------------------------
 
 [[endpoints]]
@@ -200,5 +272,1016 @@ name = "Timed transcription (with speaker attribution)"
 type = "json"
 filename = { nametype = "Pattern", value = "\\.json$" }
 
-#---------------------------------------------------------------------------------
 
+#----------------------------------- ENGLISH ASR ----------------------------------------------
+
+[[endpoints]]
+name = "English Speech Recognition"
+description = "Transcribe dutch texts"
+path = "/en"  #project name will be appended automatically
+mode = "Project"
+background_services = [ "asrserver-en" ]
+status_pattern = ".*" #every line from stderr qualifies as a status message
+command = "./asrservice_wrapper.sh"
+args = [ "-p", "11002" ]
+#automatically add arguments from the defined parameters on top of args
+auto_add_args = true
+public = false
+
+
+#(this gets a bit verbose because of the parameter repetition each time)
+
+[[endpoints.parameters]]
+id = "diarization"
+name = "Diarization"
+description = "Enable diarization (speaker recognition). Note that this has a performance impact so if you don't need it you can best leave it off."
+required = false
+type = { parametertype = "Bool", default = false }
+flag = "-d"
+
+[[endpoints.parameters]]
+id = "return_char_alignments"
+name = "Return character alignments"
+description = "Returns alignments on a character level"
+required = false
+type = { parametertype = "Bool", default = false }
+flag = "-c"
+
+[[endpoints.parameters]]
+id = "minspeakers"
+name = "Minimum number of speakers"
+description = "Setting this helps diarization"
+required = false
+type = { parametertype = "Int" }
+flag = "-m"
+
+[[endpoints.parameters]]
+id = "minspeakers"
+name = "Maximum number of speakers"
+description = "Setting this helps diarization"
+required = false
+type = { parametertype = "Int" }
+flag = "-M"
+
+[[endpoints.parameters]]
+id = "inputwav"
+name = "Input audio (Wav)"
+description = "The file to be transcribed"
+required = false
+type = { parametertype = "File", filetype = "wav", filename = { nametype = "Pattern", value = "\\.wav$" } }
+multiple = true
+
+[[endpoints.parameters]]
+id = "inputmp3"
+name = "Input audio (Mp3)"
+description = "The file to be transcribed"
+required = false
+type = { parametertype = "File", filetype = "mp3", filename = { nametype = "Pattern", value = "\\.mp3$" } }
+multiple = true
+
+[[endpoints.parameters]]
+id = "inputogg"
+name = "Input audio (Ogg)"
+description = "The file to be transcribed"
+required = false
+type = { parametertype = "File", filetype = "ogg", filename = { nametype = "Pattern", value = "\\.ogg$" } }
+multiple = true
+
+[[endpoints.outputfiles]]
+name = "Transcription Only"
+type = "txt"
+filename = { nametype = "Pattern", value = "\\.txt$" }
+
+[[endpoints.outputfiles]]
+name = "Timed transcription (with speaker attribution)"
+type = "srt"
+filename = { nametype = "Pattern", value = "\\.srt$" }
+
+[[endpoints.outputfiles]]
+name = "Timed transcription (with speaker attribution)"
+type = "tsv"
+filename = { nametype = "Pattern", value = "\\.tsv$" }
+
+[[endpoints.outputfiles]]
+name = "Timed transcription (with speaker attribution)"
+type = "ctm"
+filename = { nametype = "Pattern", value = "\\.ctm$" }
+
+[[endpoints.outputfiles]]
+name = "Timed transcription (with speaker attribution)"
+type = "vtt"
+filename = { nametype = "Pattern", value = "\\.vtt$" }
+
+[[endpoints.outputfiles]]
+name = "Timed transcription (with speaker attribution)"
+type = "json"
+filename = { nametype = "Pattern", value = "\\.json$" }
+
+#----------------------------------- GERMAN ASR ----------------------------------------------
+
+[[endpoints]]
+name = "German Speech Recognition"
+description = "Transcribe german texts"
+path = "/de"  #project name will be appended automatically
+mode = "Project"
+background_services = [ "asrserver-de" ]
+status_pattern = ".*" #every line from stderr qualifies as a status message
+command = "./asrservice_wrapper.sh"
+args = [ "-p", "11003" ]
+#automatically add arguments from the defined parameters on top of args
+auto_add_args = true
+public = false
+
+[[endpoints.parameters]]
+id = "diarization"
+name = "Diarization"
+description = "Enable diarization (speaker recognition). Note that this has a performance impact so if you don't need it you can best leave it off."
+required = false
+type = { parametertype = "Bool", default = false }
+flag = "-d"
+
+[[endpoints.parameters]]
+id = "return_char_alignments"
+name = "Return character alignments"
+description = "Returns alignments on a character level"
+required = false
+type = { parametertype = "Bool", default = false }
+flag = "-c"
+
+[[endpoints.parameters]]
+id = "minspeakers"
+name = "Minimum number of speakers"
+description = "Setting this helps diarization"
+required = false
+type = { parametertype = "Int" }
+flag = "-m"
+
+[[endpoints.parameters]]
+id = "minspeakers"
+name = "Maximum number of speakers"
+description = "Setting this helps diarization"
+required = false
+type = { parametertype = "Int" }
+flag = "-M"
+
+[[endpoints.parameters]]
+id = "inputwav"
+name = "Input audio (Wav)"
+description = "The file to be transcribed"
+required = false
+type = { parametertype = "File", filetype = "wav", filename = { nametype = "Pattern", value = "\\.wav$" } }
+multiple = true
+
+[[endpoints.parameters]]
+id = "inputmp3"
+name = "Input audio (Mp3)"
+description = "The file to be transcribed"
+required = false
+type = { parametertype = "File", filetype = "mp3", filename = { nametype = "Pattern", value = "\\.mp3$" } }
+multiple = true
+
+[[endpoints.parameters]]
+id = "inputogg"
+name = "Input audio (Ogg)"
+description = "The file to be transcribed"
+required = false
+type = { parametertype = "File", filetype = "ogg", filename = { nametype = "Pattern", value = "\\.ogg$" } }
+multiple = true
+
+[[endpoints.outputfiles]]
+name = "Transcription Only"
+type = "txt"
+filename = { nametype = "Pattern", value = "\\.txt$" }
+
+[[endpoints.outputfiles]]
+name = "Timed transcription (with speaker attribution)"
+type = "srt"
+filename = { nametype = "Pattern", value = "\\.srt$" }
+
+[[endpoints.outputfiles]]
+name = "Timed transcription (with speaker attribution)"
+type = "tsv"
+filename = { nametype = "Pattern", value = "\\.tsv$" }
+
+[[endpoints.outputfiles]]
+name = "Timed transcription (with speaker attribution)"
+type = "ctm"
+filename = { nametype = "Pattern", value = "\\.ctm$" }
+
+[[endpoints.outputfiles]]
+name = "Timed transcription (with speaker attribution)"
+type = "vtt"
+filename = { nametype = "Pattern", value = "\\.vtt$" }
+
+[[endpoints.outputfiles]]
+name = "Timed transcription (with speaker attribution)"
+type = "json"
+filename = { nametype = "Pattern", value = "\\.json$" }
+
+#----------------------------------- GREEK ASR ----------------------------------------------
+
+[[endpoints]]
+name = "Greek Speech Recognition"
+description = "Transcribe greek texts"
+path = "/el"  #project name will be appended automatically
+mode = "Project"
+background_services = [ "asrserver-el" ]
+status_pattern = ".*" #every line from stderr qualifies as a status message
+command = "./asrservice_wrapper.sh"
+args = [ "-p", "11004" ]
+#automatically add arguments from the defined parameters on top of args
+auto_add_args = true
+public = false
+
+[[endpoints.parameters]]
+id = "diarization"
+name = "Diarization"
+description = "Enable diarization (speaker recognition). Note that this has a performance impact so if you don't need it you can best leave it off."
+required = false
+type = { parametertype = "Bool", default = false }
+flag = "-d"
+
+[[endpoints.parameters]]
+id = "return_char_alignments"
+name = "Return character alignments"
+description = "Returns alignments on a character level"
+required = false
+type = { parametertype = "Bool", default = false }
+flag = "-c"
+
+[[endpoints.parameters]]
+id = "minspeakers"
+name = "Minimum number of speakers"
+description = "Setting this helps diarization"
+required = false
+type = { parametertype = "Int" }
+flag = "-m"
+
+[[endpoints.parameters]]
+id = "minspeakers"
+name = "Maximum number of speakers"
+description = "Setting this helps diarization"
+required = false
+type = { parametertype = "Int" }
+flag = "-M"
+
+[[endpoints.parameters]]
+id = "inputwav"
+name = "Input audio (Wav)"
+description = "The file to be transcribed"
+required = false
+type = { parametertype = "File", filetype = "wav", filename = { nametype = "Pattern", value = "\\.wav$" } }
+multiple = true
+
+[[endpoints.parameters]]
+id = "inputmp3"
+name = "Input audio (Mp3)"
+description = "The file to be transcribed"
+required = false
+type = { parametertype = "File", filetype = "mp3", filename = { nametype = "Pattern", value = "\\.mp3$" } }
+multiple = true
+
+[[endpoints.parameters]]
+id = "inputogg"
+name = "Input audio (Ogg)"
+description = "The file to be transcribed"
+required = false
+type = { parametertype = "File", filetype = "ogg", filename = { nametype = "Pattern", value = "\\.ogg$" } }
+multiple = true
+
+[[endpoints.outputfiles]]
+name = "Transcription Only"
+type = "txt"
+filename = { nametype = "Pattern", value = "\\.txt$" }
+
+[[endpoints.outputfiles]]
+name = "Timed transcription (with speaker attribution)"
+type = "srt"
+filename = { nametype = "Pattern", value = "\\.srt$" }
+
+[[endpoints.outputfiles]]
+name = "Timed transcription (with speaker attribution)"
+type = "tsv"
+filename = { nametype = "Pattern", value = "\\.tsv$" }
+
+[[endpoints.outputfiles]]
+name = "Timed transcription (with speaker attribution)"
+type = "ctm"
+filename = { nametype = "Pattern", value = "\\.ctm$" }
+
+[[endpoints.outputfiles]]
+name = "Timed transcription (with speaker attribution)"
+type = "vtt"
+filename = { nametype = "Pattern", value = "\\.vtt$" }
+
+[[endpoints.outputfiles]]
+name = "Timed transcription (with speaker attribution)"
+type = "json"
+filename = { nametype = "Pattern", value = "\\.json$" }
+
+#----------------------------------- FRENCH ASR ----------------------------------------------
+
+[[endpoints]]
+name = "French Speech Recognition"
+description = "Transcribe french texts"
+path = "/fr"  #project name will be appended automatically
+mode = "Project"
+background_services = [ "asrserver-fr" ]
+status_pattern = ".*" #every line from stderr qualifies as a status message
+command = "./asrservice_wrapper.sh"
+args = [ "-p", "11005" ]
+#automatically add arguments from the defined parameters on top of args
+auto_add_args = true
+public = false
+
+[[endpoints.parameters]]
+id = "diarization"
+name = "Diarization"
+description = "Enable diarization (speaker recognition). Note that this has a performance impact so if you don't need it you can best leave it off."
+required = false
+type = { parametertype = "Bool", default = false }
+flag = "-d"
+
+[[endpoints.parameters]]
+id = "return_char_alignments"
+name = "Return character alignments"
+description = "Returns alignments on a character level"
+required = false
+type = { parametertype = "Bool", default = false }
+flag = "-c"
+
+[[endpoints.parameters]]
+id = "minspeakers"
+name = "Minimum number of speakers"
+description = "Setting this helps diarization"
+required = false
+type = { parametertype = "Int" }
+flag = "-m"
+
+[[endpoints.parameters]]
+id = "minspeakers"
+name = "Maximum number of speakers"
+description = "Setting this helps diarization"
+required = false
+type = { parametertype = "Int" }
+flag = "-M"
+
+[[endpoints.parameters]]
+id = "inputwav"
+name = "Input audio (Wav)"
+description = "The file to be transcribed"
+required = false
+type = { parametertype = "File", filetype = "wav", filename = { nametype = "Pattern", value = "\\.wav$" } }
+multiple = true
+
+[[endpoints.parameters]]
+id = "inputmp3"
+name = "Input audio (Mp3)"
+description = "The file to be transcribed"
+required = false
+type = { parametertype = "File", filetype = "mp3", filename = { nametype = "Pattern", value = "\\.mp3$" } }
+multiple = true
+
+[[endpoints.parameters]]
+id = "inputogg"
+name = "Input audio (Ogg)"
+description = "The file to be transcribed"
+required = false
+type = { parametertype = "File", filetype = "ogg", filename = { nametype = "Pattern", value = "\\.ogg$" } }
+multiple = true
+
+[[endpoints.outputfiles]]
+name = "Transcription Only"
+type = "txt"
+filename = { nametype = "Pattern", value = "\\.txt$" }
+
+[[endpoints.outputfiles]]
+name = "Timed transcription (with speaker attribution)"
+type = "srt"
+filename = { nametype = "Pattern", value = "\\.srt$" }
+
+[[endpoints.outputfiles]]
+name = "Timed transcription (with speaker attribution)"
+type = "tsv"
+filename = { nametype = "Pattern", value = "\\.tsv$" }
+
+[[endpoints.outputfiles]]
+name = "Timed transcription (with speaker attribution)"
+type = "ctm"
+filename = { nametype = "Pattern", value = "\\.ctm$" }
+
+[[endpoints.outputfiles]]
+name = "Timed transcription (with speaker attribution)"
+type = "vtt"
+filename = { nametype = "Pattern", value = "\\.vtt$" }
+
+[[endpoints.outputfiles]]
+name = "Timed transcription (with speaker attribution)"
+type = "json"
+filename = { nametype = "Pattern", value = "\\.json$" }
+
+#----------------------------------- ITALIAN ASR ----------------------------------------------
+
+[[endpoints]]
+name = "Italian Speech Recognition"
+description = "Transcribe italian texts"
+path = "/it"  #project name will be appended automatically
+mode = "Project"
+background_services = [ "asrserver-it" ]
+status_pattern = ".*" #every line from stderr qualifies as a status message
+command = "./asrservice_wrapper.sh"
+args = [ "-p", "11006" ]
+#automatically add arguments from the defined parameters on top of args
+auto_add_args = true
+public = false
+
+[[endpoints.parameters]]
+id = "diarization"
+name = "Diarization"
+description = "Enable diarization (speaker recognition). Note that this has a performance impact so if you don't need it you can best leave it off."
+required = false
+type = { parametertype = "Bool", default = false }
+flag = "-d"
+
+[[endpoints.parameters]]
+id = "return_char_alignments"
+name = "Return character alignments"
+description = "Returns alignments on a character level"
+required = false
+type = { parametertype = "Bool", default = false }
+flag = "-c"
+
+[[endpoints.parameters]]
+id = "minspeakers"
+name = "Minimum number of speakers"
+description = "Setting this helps diarization"
+required = false
+type = { parametertype = "Int" }
+flag = "-m"
+
+[[endpoints.parameters]]
+id = "minspeakers"
+name = "Maximum number of speakers"
+description = "Setting this helps diarization"
+required = false
+type = { parametertype = "Int" }
+flag = "-M"
+
+[[endpoints.parameters]]
+id = "inputwav"
+name = "Input audio (Wav)"
+description = "The file to be transcribed"
+required = false
+type = { parametertype = "File", filetype = "wav", filename = { nametype = "Pattern", value = "\\.wav$" } }
+multiple = true
+
+[[endpoints.parameters]]
+id = "inputmp3"
+name = "Input audio (Mp3)"
+description = "The file to be transcribed"
+required = false
+type = { parametertype = "File", filetype = "mp3", filename = { nametype = "Pattern", value = "\\.mp3$" } }
+multiple = true
+
+[[endpoints.parameters]]
+id = "inputogg"
+name = "Input audio (Ogg)"
+description = "The file to be transcribed"
+required = false
+type = { parametertype = "File", filetype = "ogg", filename = { nametype = "Pattern", value = "\\.ogg$" } }
+multiple = true
+
+[[endpoints.outputfiles]]
+name = "Transcription Only"
+type = "txt"
+filename = { nametype = "Pattern", value = "\\.txt$" }
+
+[[endpoints.outputfiles]]
+name = "Timed transcription (with speaker attribution)"
+type = "srt"
+filename = { nametype = "Pattern", value = "\\.srt$" }
+
+[[endpoints.outputfiles]]
+name = "Timed transcription (with speaker attribution)"
+type = "tsv"
+filename = { nametype = "Pattern", value = "\\.tsv$" }
+
+[[endpoints.outputfiles]]
+name = "Timed transcription (with speaker attribution)"
+type = "ctm"
+filename = { nametype = "Pattern", value = "\\.ctm$" }
+
+[[endpoints.outputfiles]]
+name = "Timed transcription (with speaker attribution)"
+type = "vtt"
+filename = { nametype = "Pattern", value = "\\.vtt$" }
+
+[[endpoints.outputfiles]]
+name = "Timed transcription (with speaker attribution)"
+type = "json"
+filename = { nametype = "Pattern", value = "\\.json$" }
+
+#----------------------------------- JAPANESE ASR ----------------------------------------------
+
+[[endpoints]]
+name = "Japanese Speech Recognition"
+description = "Transcribe japanese texts"
+path = "/ja"  #project name will be appended automatically
+mode = "Project"
+background_services = [ "asrserver-it" ]
+status_pattern = ".*" #every line from stderr qualifies as a status message
+command = "./asrservice_wrapper.sh"
+args = [ "-p", "11007" ]
+#automatically add arguments from the defined parameters on top of args
+auto_add_args = true
+public = false
+
+[[endpoints.parameters]]
+id = "diarization"
+name = "Diarization"
+description = "Enable diarization (speaker recognition). Note that this has a performance impact so if you don't need it you can best leave it off."
+required = false
+type = { parametertype = "Bool", default = false }
+flag = "-d"
+
+[[endpoints.parameters]]
+id = "return_char_alignments"
+name = "Return character alignments"
+description = "Returns alignments on a character level"
+required = false
+type = { parametertype = "Bool", default = false }
+flag = "-c"
+
+[[endpoints.parameters]]
+id = "minspeakers"
+name = "Minimum number of speakers"
+description = "Setting this helps diarization"
+required = false
+type = { parametertype = "Int" }
+flag = "-m"
+
+[[endpoints.parameters]]
+id = "minspeakers"
+name = "Maximum number of speakers"
+description = "Setting this helps diarization"
+required = false
+type = { parametertype = "Int" }
+flag = "-M"
+
+[[endpoints.parameters]]
+id = "inputwav"
+name = "Input audio (Wav)"
+description = "The file to be transcribed"
+required = false
+type = { parametertype = "File", filetype = "wav", filename = { nametype = "Pattern", value = "\\.wav$" } }
+multiple = true
+
+[[endpoints.parameters]]
+id = "inputmp3"
+name = "Input audio (Mp3)"
+description = "The file to be transcribed"
+required = false
+type = { parametertype = "File", filetype = "mp3", filename = { nametype = "Pattern", value = "\\.mp3$" } }
+multiple = true
+
+[[endpoints.parameters]]
+id = "inputogg"
+name = "Input audio (Ogg)"
+description = "The file to be transcribed"
+required = false
+type = { parametertype = "File", filetype = "ogg", filename = { nametype = "Pattern", value = "\\.ogg$" } }
+multiple = true
+
+[[endpoints.outputfiles]]
+name = "Transcription Only"
+type = "txt"
+filename = { nametype = "Pattern", value = "\\.txt$" }
+
+[[endpoints.outputfiles]]
+name = "Timed transcription (with speaker attribution)"
+type = "srt"
+filename = { nametype = "Pattern", value = "\\.srt$" }
+
+[[endpoints.outputfiles]]
+name = "Timed transcription (with speaker attribution)"
+type = "tsv"
+filename = { nametype = "Pattern", value = "\\.tsv$" }
+
+[[endpoints.outputfiles]]
+name = "Timed transcription (with speaker attribution)"
+type = "ctm"
+filename = { nametype = "Pattern", value = "\\.ctm$" }
+
+[[endpoints.outputfiles]]
+name = "Timed transcription (with speaker attribution)"
+type = "vtt"
+filename = { nametype = "Pattern", value = "\\.vtt$" }
+
+[[endpoints.outputfiles]]
+name = "Timed transcription (with speaker attribution)"
+type = "json"
+filename = { nametype = "Pattern", value = "\\.json$" }
+
+#----------------------------------- ITALIAN ASR ----------------------------------------------
+
+[[endpoints]]
+name = "Mandarin Chinesed Speech Recognition"
+description = "Transcribe chinese texts"
+path = "/it"  #project name will be appended automatically
+mode = "Project"
+background_services = [ "asrserver-zh" ]
+status_pattern = ".*" #every line from stderr qualifies as a status message
+command = "./asrservice_wrapper.sh"
+args = [ "-p", "11008" ]
+#automatically add arguments from the defined parameters on top of args
+auto_add_args = true
+public = false
+
+[[endpoints.parameters]]
+id = "diarization"
+name = "Diarization"
+description = "Enable diarization (speaker recognition). Note that this has a performance impact so if you don't need it you can best leave it off."
+required = false
+type = { parametertype = "Bool", default = false }
+flag = "-d"
+
+[[endpoints.parameters]]
+id = "return_char_alignments"
+name = "Return character alignments"
+description = "Returns alignments on a character level"
+required = false
+type = { parametertype = "Bool", default = false }
+flag = "-c"
+
+[[endpoints.parameters]]
+id = "minspeakers"
+name = "Minimum number of speakers"
+description = "Setting this helps diarization"
+required = false
+type = { parametertype = "Int" }
+flag = "-m"
+
+[[endpoints.parameters]]
+id = "minspeakers"
+name = "Maximum number of speakers"
+description = "Setting this helps diarization"
+required = false
+type = { parametertype = "Int" }
+flag = "-M"
+
+[[endpoints.parameters]]
+id = "inputwav"
+name = "Input audio (Wav)"
+description = "The file to be transcribed"
+required = false
+type = { parametertype = "File", filetype = "wav", filename = { nametype = "Pattern", value = "\\.wav$" } }
+multiple = true
+
+[[endpoints.parameters]]
+id = "inputmp3"
+name = "Input audio (Mp3)"
+description = "The file to be transcribed"
+required = false
+type = { parametertype = "File", filetype = "mp3", filename = { nametype = "Pattern", value = "\\.mp3$" } }
+multiple = true
+
+[[endpoints.parameters]]
+id = "inputogg"
+name = "Input audio (Ogg)"
+description = "The file to be transcribed"
+required = false
+type = { parametertype = "File", filetype = "ogg", filename = { nametype = "Pattern", value = "\\.ogg$" } }
+multiple = true
+
+[[endpoints.outputfiles]]
+name = "Transcription Only"
+type = "txt"
+filename = { nametype = "Pattern", value = "\\.txt$" }
+
+[[endpoints.outputfiles]]
+name = "Timed transcription (with speaker attribution)"
+type = "srt"
+filename = { nametype = "Pattern", value = "\\.srt$" }
+
+[[endpoints.outputfiles]]
+name = "Timed transcription (with speaker attribution)"
+type = "tsv"
+filename = { nametype = "Pattern", value = "\\.tsv$" }
+
+[[endpoints.outputfiles]]
+name = "Timed transcription (with speaker attribution)"
+type = "ctm"
+filename = { nametype = "Pattern", value = "\\.ctm$" }
+
+[[endpoints.outputfiles]]
+name = "Timed transcription (with speaker attribution)"
+type = "vtt"
+filename = { nametype = "Pattern", value = "\\.vtt$" }
+
+[[endpoints.outputfiles]]
+name = "Timed transcription (with speaker attribution)"
+type = "json"
+filename = { nametype = "Pattern", value = "\\.json$" }
+
+#----------------------------------- SPANISH ASR ----------------------------------------------
+
+[[endpoints]]
+name = "Spanish Speech Recognition"
+description = "Transcribe spanish texts"
+path = "/es"  #project name will be appended automatically
+mode = "Project"
+background_services = [ "asrserver-es" ]
+status_pattern = ".*" #every line from stderr qualifies as a status message
+command = "./asrservice_wrapper.sh"
+args = [ "-p", "11009" ]
+#automatically add arguments from the defined parameters on top of args
+auto_add_args = true
+public = false
+
+[[endpoints.parameters]]
+id = "diarization"
+name = "Diarization"
+description = "Enable diarization (speaker recognition). Note that this has a performance impact so if you don't need it you can best leave it off."
+required = false
+type = { parametertype = "Bool", default = false }
+flag = "-d"
+
+[[endpoints.parameters]]
+id = "return_char_alignments"
+name = "Return character alignments"
+description = "Returns alignments on a character level"
+required = false
+type = { parametertype = "Bool", default = false }
+flag = "-c"
+
+[[endpoints.parameters]]
+id = "minspeakers"
+name = "Minimum number of speakers"
+description = "Setting this helps diarization"
+required = false
+type = { parametertype = "Int" }
+flag = "-m"
+
+[[endpoints.parameters]]
+id = "minspeakers"
+name = "Maximum number of speakers"
+description = "Setting this helps diarization"
+required = false
+type = { parametertype = "Int" }
+flag = "-M"
+
+[[endpoints.parameters]]
+id = "inputwav"
+name = "Input audio (Wav)"
+description = "The file to be transcribed"
+required = false
+type = { parametertype = "File", filetype = "wav", filename = { nametype = "Pattern", value = "\\.wav$" } }
+multiple = true
+
+[[endpoints.parameters]]
+id = "inputmp3"
+name = "Input audio (Mp3)"
+description = "The file to be transcribed"
+required = false
+type = { parametertype = "File", filetype = "mp3", filename = { nametype = "Pattern", value = "\\.mp3$" } }
+multiple = true
+
+[[endpoints.parameters]]
+id = "inputogg"
+name = "Input audio (Ogg)"
+description = "The file to be transcribed"
+required = false
+type = { parametertype = "File", filetype = "ogg", filename = { nametype = "Pattern", value = "\\.ogg$" } }
+multiple = true
+
+[[endpoints.outputfiles]]
+name = "Transcription Only"
+type = "txt"
+filename = { nametype = "Pattern", value = "\\.txt$" }
+
+[[endpoints.outputfiles]]
+name = "Timed transcription (with speaker attribution)"
+type = "srt"
+filename = { nametype = "Pattern", value = "\\.srt$" }
+
+[[endpoints.outputfiles]]
+name = "Timed transcription (with speaker attribution)"
+type = "tsv"
+filename = { nametype = "Pattern", value = "\\.tsv$" }
+
+[[endpoints.outputfiles]]
+name = "Timed transcription (with speaker attribution)"
+type = "ctm"
+filename = { nametype = "Pattern", value = "\\.ctm$" }
+
+[[endpoints.outputfiles]]
+name = "Timed transcription (with speaker attribution)"
+type = "vtt"
+filename = { nametype = "Pattern", value = "\\.vtt$" }
+
+[[endpoints.outputfiles]]
+name = "Timed transcription (with speaker attribution)"
+type = "json"
+filename = { nametype = "Pattern", value = "\\.json$" }
+
+#----------------------------------- PORTUGUESE ASR ----------------------------------------------
+
+[[endpoints]]
+name = "Portuguese Speech Recognition"
+description = "Transcribe portuguese texts"
+path = "/pt"  #project name will be appended automatically
+mode = "Project"
+background_services = [ "asrserver-pt" ]
+status_pattern = ".*" #every line from stderr qualifies as a status message
+command = "./asrservice_wrapper.sh"
+args = [ "-p", "11010" ]
+#automatically add arguments from the defined parameters on top of args
+auto_add_args = true
+public = false
+
+[[endpoints.parameters]]
+id = "diarization"
+name = "Diarization"
+description = "Enable diarization (speaker recognition). Note that this has a performance impact so if you don't need it you can best leave it off."
+required = false
+type = { parametertype = "Bool", default = false }
+flag = "-d"
+
+[[endpoints.parameters]]
+id = "return_char_alignments"
+name = "Return character alignments"
+description = "Returns alignments on a character level"
+required = false
+type = { parametertype = "Bool", default = false }
+flag = "-c"
+
+[[endpoints.parameters]]
+id = "minspeakers"
+name = "Minimum number of speakers"
+description = "Setting this helps diarization"
+required = false
+type = { parametertype = "Int" }
+flag = "-m"
+
+[[endpoints.parameters]]
+id = "minspeakers"
+name = "Maximum number of speakers"
+description = "Setting this helps diarization"
+required = false
+type = { parametertype = "Int" }
+flag = "-M"
+
+[[endpoints.parameters]]
+id = "inputwav"
+name = "Input audio (Wav)"
+description = "The file to be transcribed"
+required = false
+type = { parametertype = "File", filetype = "wav", filename = { nametype = "Pattern", value = "\\.wav$" } }
+multiple = true
+
+[[endpoints.parameters]]
+id = "inputmp3"
+name = "Input audio (Mp3)"
+description = "The file to be transcribed"
+required = false
+type = { parametertype = "File", filetype = "mp3", filename = { nametype = "Pattern", value = "\\.mp3$" } }
+multiple = true
+
+[[endpoints.parameters]]
+id = "inputogg"
+name = "Input audio (Ogg)"
+description = "The file to be transcribed"
+required = false
+type = { parametertype = "File", filetype = "ogg", filename = { nametype = "Pattern", value = "\\.ogg$" } }
+multiple = true
+
+[[endpoints.outputfiles]]
+name = "Transcription Only"
+type = "txt"
+filename = { nametype = "Pattern", value = "\\.txt$" }
+
+[[endpoints.outputfiles]]
+name = "Timed transcription (with speaker attribution)"
+type = "srt"
+filename = { nametype = "Pattern", value = "\\.srt$" }
+
+[[endpoints.outputfiles]]
+name = "Timed transcription (with speaker attribution)"
+type = "tsv"
+filename = { nametype = "Pattern", value = "\\.tsv$" }
+
+[[endpoints.outputfiles]]
+name = "Timed transcription (with speaker attribution)"
+type = "ctm"
+filename = { nametype = "Pattern", value = "\\.ctm$" }
+
+[[endpoints.outputfiles]]
+name = "Timed transcription (with speaker attribution)"
+type = "vtt"
+filename = { nametype = "Pattern", value = "\\.vtt$" }
+
+[[endpoints.outputfiles]]
+name = "Timed transcription (with speaker attribution)"
+type = "json"
+filename = { nametype = "Pattern", value = "\\.json$" }
+
+#----------------------------------- UKRAINIAN ASR ----------------------------------------------
+
+[[endpoints]]
+name = "Ukrainian Speech Recognition"
+description = "Transcribe ukrainian texts"
+path = "/uk"  #project name will be appended automatically
+mode = "Project"
+background_services = [ "asrserver-uk" ]
+status_pattern = ".*" #every line from stderr qualifies as a status message
+command = "./asrservice_wrapper.sh"
+args = [ "-p", "11011" ]
+#automatically add arguments from the defined parameters on top of args
+auto_add_args = true
+public = false
+
+[[endpoints.parameters]]
+id = "diarization"
+name = "Diarization"
+description = "Enable diarization (speaker recognition). Note that this has a performance impact so if you don't need it you can best leave it off."
+required = false
+type = { parametertype = "Bool", default = false }
+flag = "-d"
+
+[[endpoints.parameters]]
+id = "return_char_alignments"
+name = "Return character alignments"
+description = "Returns alignments on a character level"
+required = false
+type = { parametertype = "Bool", default = false }
+flag = "-c"
+
+[[endpoints.parameters]]
+id = "minspeakers"
+name = "Minimum number of speakers"
+description = "Setting this helps diarization"
+required = false
+type = { parametertype = "Int" }
+flag = "-m"
+
+[[endpoints.parameters]]
+id = "minspeakers"
+name = "Maximum number of speakers"
+description = "Setting this helps diarization"
+required = false
+type = { parametertype = "Int" }
+flag = "-M"
+
+[[endpoints.parameters]]
+id = "inputwav"
+name = "Input audio (Wav)"
+description = "The file to be transcribed"
+required = false
+type = { parametertype = "File", filetype = "wav", filename = { nametype = "Pattern", value = "\\.wav$" } }
+multiple = true
+
+[[endpoints.parameters]]
+id = "inputmp3"
+name = "Input audio (Mp3)"
+description = "The file to be transcribed"
+required = false
+type = { parametertype = "File", filetype = "mp3", filename = { nametype = "Pattern", value = "\\.mp3$" } }
+multiple = true
+
+[[endpoints.parameters]]
+id = "inputogg"
+name = "Input audio (Ogg)"
+description = "The file to be transcribed"
+required = false
+type = { parametertype = "File", filetype = "ogg", filename = { nametype = "Pattern", value = "\\.ogg$" } }
+multiple = true
+
+[[endpoints.outputfiles]]
+name = "Transcription Only"
+type = "txt"
+filename = { nametype = "Pattern", value = "\\.txt$" }
+
+[[endpoints.outputfiles]]
+name = "Timed transcription (with speaker attribution)"
+type = "srt"
+filename = { nametype = "Pattern", value = "\\.srt$" }
+
+[[endpoints.outputfiles]]
+name = "Timed transcription (with speaker attribution)"
+type = "tsv"
+filename = { nametype = "Pattern", value = "\\.tsv$" }
+
+[[endpoints.outputfiles]]
+name = "Timed transcription (with speaker attribution)"
+type = "ctm"
+filename = { nametype = "Pattern", value = "\\.ctm$" }
+
+[[endpoints.outputfiles]]
+name = "Timed transcription (with speaker attribution)"
+type = "vtt"
+filename = { nametype = "Pattern", value = "\\.vtt$" }
+
+[[endpoints.outputfiles]]
+name = "Timed transcription (with speaker attribution)"
+type = "json"
+filename = { nametype = "Pattern", value = "\\.json$" }
