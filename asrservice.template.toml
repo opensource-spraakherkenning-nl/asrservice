@@ -277,7 +277,7 @@ filename = { nametype = "Pattern", value = "\\.json$" }
 
 [[endpoints]]
 name = "English Speech Recognition"
-description = "Transcribe dutch texts"
+description = "Transcribe english texts"
 path = "/en"  #project name will be appended automatically
 mode = "Project"
 background_services = [ "asrserver-en" ]
