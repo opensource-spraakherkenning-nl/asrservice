@@ -288,94 +288,10 @@ args = [ "-p", "11002" ]
 auto_add_args = true
 public = false
 
+#copy parameters and output files so we don't need to specify them all again
+parameters_from = "/nl"
+outputfiles_from = "/nl"
 
-#(this gets a bit verbose because of the parameter repetition each time)
-
-[[endpoints.parameters]]
-id = "diarization"
-name = "Diarization"
-description = "Enable diarization (speaker recognition). Note that this has a performance impact so if you don't need it you can best leave it off."
-required = false
-type = { parametertype = "Bool", default = false }
-flag = "-d"
-
-[[endpoints.parameters]]
-id = "return_char_alignments"
-name = "Return character alignments"
-description = "Returns alignments on a character level"
-required = false
-type = { parametertype = "Bool", default = false }
-flag = "-c"
-
-[[endpoints.parameters]]
-id = "minspeakers"
-name = "Minimum number of speakers"
-description = "Setting this helps diarization"
-required = false
-type = { parametertype = "Int" }
-flag = "-m"
-
-[[endpoints.parameters]]
-id = "minspeakers"
-name = "Maximum number of speakers"
-description = "Setting this helps diarization"
-required = false
-type = { parametertype = "Int" }
-flag = "-M"
-
-[[endpoints.parameters]]
-id = "inputwav"
-name = "Input audio (Wav)"
-description = "The file to be transcribed"
-required = false
-type = { parametertype = "File", filetype = "wav", filename = { nametype = "Pattern", value = "\\.wav$" } }
-multiple = true
-
-[[endpoints.parameters]]
-id = "inputmp3"
-name = "Input audio (Mp3)"
-description = "The file to be transcribed"
-required = false
-type = { parametertype = "File", filetype = "mp3", filename = { nametype = "Pattern", value = "\\.mp3$" } }
-multiple = true
-
-[[endpoints.parameters]]
-id = "inputogg"
-name = "Input audio (Ogg)"
-description = "The file to be transcribed"
-required = false
-type = { parametertype = "File", filetype = "ogg", filename = { nametype = "Pattern", value = "\\.ogg$" } }
-multiple = true
-
-[[endpoints.outputfiles]]
-name = "Transcription Only"
-type = "txt"
-filename = { nametype = "Pattern", value = "\\.txt$" }
-
-[[endpoints.outputfiles]]
-name = "Timed transcription (with speaker attribution)"
-type = "srt"
-filename = { nametype = "Pattern", value = "\\.srt$" }
-
-[[endpoints.outputfiles]]
-name = "Timed transcription (with speaker attribution)"
-type = "tsv"
-filename = { nametype = "Pattern", value = "\\.tsv$" }
-
-[[endpoints.outputfiles]]
-name = "Timed transcription (with speaker attribution)"
-type = "ctm"
-filename = { nametype = "Pattern", value = "\\.ctm$" }
-
-[[endpoints.outputfiles]]
-name = "Timed transcription (with speaker attribution)"
-type = "vtt"
-filename = { nametype = "Pattern", value = "\\.vtt$" }
-
-[[endpoints.outputfiles]]
-name = "Timed transcription (with speaker attribution)"
-type = "json"
-filename = { nametype = "Pattern", value = "\\.json$" }
 
 #----------------------------------- GERMAN ASR ----------------------------------------------
 
@@ -392,91 +308,10 @@ args = [ "-p", "11003" ]
 auto_add_args = true
 public = false
 
-[[endpoints.parameters]]
-id = "diarization"
-name = "Diarization"
-description = "Enable diarization (speaker recognition). Note that this has a performance impact so if you don't need it you can best leave it off."
-required = false
-type = { parametertype = "Bool", default = false }
-flag = "-d"
+#copy parameters and output files so we don't need to specify them all again
+parameters_from = "/nl"
+outputfiles_from = "/nl"
 
-[[endpoints.parameters]]
-id = "return_char_alignments"
-name = "Return character alignments"
-description = "Returns alignments on a character level"
-required = false
-type = { parametertype = "Bool", default = false }
-flag = "-c"
-
-[[endpoints.parameters]]
-id = "minspeakers"
-name = "Minimum number of speakers"
-description = "Setting this helps diarization"
-required = false
-type = { parametertype = "Int" }
-flag = "-m"
-
-[[endpoints.parameters]]
-id = "minspeakers"
-name = "Maximum number of speakers"
-description = "Setting this helps diarization"
-required = false
-type = { parametertype = "Int" }
-flag = "-M"
-
-[[endpoints.parameters]]
-id = "inputwav"
-name = "Input audio (Wav)"
-description = "The file to be transcribed"
-required = false
-type = { parametertype = "File", filetype = "wav", filename = { nametype = "Pattern", value = "\\.wav$" } }
-multiple = true
-
-[[endpoints.parameters]]
-id = "inputmp3"
-name = "Input audio (Mp3)"
-description = "The file to be transcribed"
-required = false
-type = { parametertype = "File", filetype = "mp3", filename = { nametype = "Pattern", value = "\\.mp3$" } }
-multiple = true
-
-[[endpoints.parameters]]
-id = "inputogg"
-name = "Input audio (Ogg)"
-description = "The file to be transcribed"
-required = false
-type = { parametertype = "File", filetype = "ogg", filename = { nametype = "Pattern", value = "\\.ogg$" } }
-multiple = true
-
-[[endpoints.outputfiles]]
-name = "Transcription Only"
-type = "txt"
-filename = { nametype = "Pattern", value = "\\.txt$" }
-
-[[endpoints.outputfiles]]
-name = "Timed transcription (with speaker attribution)"
-type = "srt"
-filename = { nametype = "Pattern", value = "\\.srt$" }
-
-[[endpoints.outputfiles]]
-name = "Timed transcription (with speaker attribution)"
-type = "tsv"
-filename = { nametype = "Pattern", value = "\\.tsv$" }
-
-[[endpoints.outputfiles]]
-name = "Timed transcription (with speaker attribution)"
-type = "ctm"
-filename = { nametype = "Pattern", value = "\\.ctm$" }
-
-[[endpoints.outputfiles]]
-name = "Timed transcription (with speaker attribution)"
-type = "vtt"
-filename = { nametype = "Pattern", value = "\\.vtt$" }
-
-[[endpoints.outputfiles]]
-name = "Timed transcription (with speaker attribution)"
-type = "json"
-filename = { nametype = "Pattern", value = "\\.json$" }
 
 #----------------------------------- GREEK ASR ----------------------------------------------
 
@@ -493,91 +328,9 @@ args = [ "-p", "11004" ]
 auto_add_args = true
 public = false
 
-[[endpoints.parameters]]
-id = "diarization"
-name = "Diarization"
-description = "Enable diarization (speaker recognition). Note that this has a performance impact so if you don't need it you can best leave it off."
-required = false
-type = { parametertype = "Bool", default = false }
-flag = "-d"
-
-[[endpoints.parameters]]
-id = "return_char_alignments"
-name = "Return character alignments"
-description = "Returns alignments on a character level"
-required = false
-type = { parametertype = "Bool", default = false }
-flag = "-c"
-
-[[endpoints.parameters]]
-id = "minspeakers"
-name = "Minimum number of speakers"
-description = "Setting this helps diarization"
-required = false
-type = { parametertype = "Int" }
-flag = "-m"
-
-[[endpoints.parameters]]
-id = "minspeakers"
-name = "Maximum number of speakers"
-description = "Setting this helps diarization"
-required = false
-type = { parametertype = "Int" }
-flag = "-M"
-
-[[endpoints.parameters]]
-id = "inputwav"
-name = "Input audio (Wav)"
-description = "The file to be transcribed"
-required = false
-type = { parametertype = "File", filetype = "wav", filename = { nametype = "Pattern", value = "\\.wav$" } }
-multiple = true
-
-[[endpoints.parameters]]
-id = "inputmp3"
-name = "Input audio (Mp3)"
-description = "The file to be transcribed"
-required = false
-type = { parametertype = "File", filetype = "mp3", filename = { nametype = "Pattern", value = "\\.mp3$" } }
-multiple = true
-
-[[endpoints.parameters]]
-id = "inputogg"
-name = "Input audio (Ogg)"
-description = "The file to be transcribed"
-required = false
-type = { parametertype = "File", filetype = "ogg", filename = { nametype = "Pattern", value = "\\.ogg$" } }
-multiple = true
-
-[[endpoints.outputfiles]]
-name = "Transcription Only"
-type = "txt"
-filename = { nametype = "Pattern", value = "\\.txt$" }
-
-[[endpoints.outputfiles]]
-name = "Timed transcription (with speaker attribution)"
-type = "srt"
-filename = { nametype = "Pattern", value = "\\.srt$" }
-
-[[endpoints.outputfiles]]
-name = "Timed transcription (with speaker attribution)"
-type = "tsv"
-filename = { nametype = "Pattern", value = "\\.tsv$" }
-
-[[endpoints.outputfiles]]
-name = "Timed transcription (with speaker attribution)"
-type = "ctm"
-filename = { nametype = "Pattern", value = "\\.ctm$" }
-
-[[endpoints.outputfiles]]
-name = "Timed transcription (with speaker attribution)"
-type = "vtt"
-filename = { nametype = "Pattern", value = "\\.vtt$" }
-
-[[endpoints.outputfiles]]
-name = "Timed transcription (with speaker attribution)"
-type = "json"
-filename = { nametype = "Pattern", value = "\\.json$" }
+#copy parameters and output files so we don't need to specify them all again
+parameters_from = "/nl"
+outputfiles_from = "/nl"
 
 #----------------------------------- FRENCH ASR ----------------------------------------------
 
@@ -594,91 +347,9 @@ args = [ "-p", "11005" ]
 auto_add_args = true
 public = false
 
-[[endpoints.parameters]]
-id = "diarization"
-name = "Diarization"
-description = "Enable diarization (speaker recognition). Note that this has a performance impact so if you don't need it you can best leave it off."
-required = false
-type = { parametertype = "Bool", default = false }
-flag = "-d"
-
-[[endpoints.parameters]]
-id = "return_char_alignments"
-name = "Return character alignments"
-description = "Returns alignments on a character level"
-required = false
-type = { parametertype = "Bool", default = false }
-flag = "-c"
-
-[[endpoints.parameters]]
-id = "minspeakers"
-name = "Minimum number of speakers"
-description = "Setting this helps diarization"
-required = false
-type = { parametertype = "Int" }
-flag = "-m"
-
-[[endpoints.parameters]]
-id = "minspeakers"
-name = "Maximum number of speakers"
-description = "Setting this helps diarization"
-required = false
-type = { parametertype = "Int" }
-flag = "-M"
-
-[[endpoints.parameters]]
-id = "inputwav"
-name = "Input audio (Wav)"
-description = "The file to be transcribed"
-required = false
-type = { parametertype = "File", filetype = "wav", filename = { nametype = "Pattern", value = "\\.wav$" } }
-multiple = true
-
-[[endpoints.parameters]]
-id = "inputmp3"
-name = "Input audio (Mp3)"
-description = "The file to be transcribed"
-required = false
-type = { parametertype = "File", filetype = "mp3", filename = { nametype = "Pattern", value = "\\.mp3$" } }
-multiple = true
-
-[[endpoints.parameters]]
-id = "inputogg"
-name = "Input audio (Ogg)"
-description = "The file to be transcribed"
-required = false
-type = { parametertype = "File", filetype = "ogg", filename = { nametype = "Pattern", value = "\\.ogg$" } }
-multiple = true
-
-[[endpoints.outputfiles]]
-name = "Transcription Only"
-type = "txt"
-filename = { nametype = "Pattern", value = "\\.txt$" }
-
-[[endpoints.outputfiles]]
-name = "Timed transcription (with speaker attribution)"
-type = "srt"
-filename = { nametype = "Pattern", value = "\\.srt$" }
-
-[[endpoints.outputfiles]]
-name = "Timed transcription (with speaker attribution)"
-type = "tsv"
-filename = { nametype = "Pattern", value = "\\.tsv$" }
-
-[[endpoints.outputfiles]]
-name = "Timed transcription (with speaker attribution)"
-type = "ctm"
-filename = { nametype = "Pattern", value = "\\.ctm$" }
-
-[[endpoints.outputfiles]]
-name = "Timed transcription (with speaker attribution)"
-type = "vtt"
-filename = { nametype = "Pattern", value = "\\.vtt$" }
-
-[[endpoints.outputfiles]]
-name = "Timed transcription (with speaker attribution)"
-type = "json"
-filename = { nametype = "Pattern", value = "\\.json$" }
+#copy parameters and output files so we don't need to specify them all again
+parameters_from = "/nl"
+outputfiles_from = "/nl"
 
 #----------------------------------- ITALIAN ASR ----------------------------------------------
 
@@ -695,91 +366,9 @@ args = [ "-p", "11006" ]
 auto_add_args = true
 public = false
 
-[[endpoints.parameters]]
-id = "diarization"
-name = "Diarization"
-description = "Enable diarization (speaker recognition). Note that this has a performance impact so if you don't need it you can best leave it off."
-required = false
-type = { parametertype = "Bool", default = false }
-flag = "-d"
-
-[[endpoints.parameters]]
-id = "return_char_alignments"
-name = "Return character alignments"
-description = "Returns alignments on a character level"
-required = false
-type = { parametertype = "Bool", default = false }
-flag = "-c"
-
-[[endpoints.parameters]]
-id = "minspeakers"
-name = "Minimum number of speakers"
-description = "Setting this helps diarization"
-required = false
-type = { parametertype = "Int" }
-flag = "-m"
-
-[[endpoints.parameters]]
-id = "minspeakers"
-name = "Maximum number of speakers"
-description = "Setting this helps diarization"
-required = false
-type = { parametertype = "Int" }
-flag = "-M"
-
-[[endpoints.parameters]]
-id = "inputwav"
-name = "Input audio (Wav)"
-description = "The file to be transcribed"
-required = false
-type = { parametertype = "File", filetype = "wav", filename = { nametype = "Pattern", value = "\\.wav$" } }
-multiple = true
-
-[[endpoints.parameters]]
-id = "inputmp3"
-name = "Input audio (Mp3)"
-description = "The file to be transcribed"
-required = false
-type = { parametertype = "File", filetype = "mp3", filename = { nametype = "Pattern", value = "\\.mp3$" } }
-multiple = true
-
-[[endpoints.parameters]]
-id = "inputogg"
-name = "Input audio (Ogg)"
-description = "The file to be transcribed"
-required = false
-type = { parametertype = "File", filetype = "ogg", filename = { nametype = "Pattern", value = "\\.ogg$" } }
-multiple = true
-
-[[endpoints.outputfiles]]
-name = "Transcription Only"
-type = "txt"
-filename = { nametype = "Pattern", value = "\\.txt$" }
-
-[[endpoints.outputfiles]]
-name = "Timed transcription (with speaker attribution)"
-type = "srt"
-filename = { nametype = "Pattern", value = "\\.srt$" }
-
-[[endpoints.outputfiles]]
-name = "Timed transcription (with speaker attribution)"
-type = "tsv"
-filename = { nametype = "Pattern", value = "\\.tsv$" }
-
-[[endpoints.outputfiles]]
-name = "Timed transcription (with speaker attribution)"
-type = "ctm"
-filename = { nametype = "Pattern", value = "\\.ctm$" }
-
-[[endpoints.outputfiles]]
-name = "Timed transcription (with speaker attribution)"
-type = "vtt"
-filename = { nametype = "Pattern", value = "\\.vtt$" }
-
-[[endpoints.outputfiles]]
-name = "Timed transcription (with speaker attribution)"
-type = "json"
-filename = { nametype = "Pattern", value = "\\.json$" }
+#copy parameters and output files so we don't need to specify them all again
+parameters_from = "/nl"
+outputfiles_from = "/nl"
 
 #----------------------------------- JAPANESE ASR ----------------------------------------------
 
@@ -796,91 +385,9 @@ args = [ "-p", "11007" ]
 auto_add_args = true
 public = false
 
-[[endpoints.parameters]]
-id = "diarization"
-name = "Diarization"
-description = "Enable diarization (speaker recognition). Note that this has a performance impact so if you don't need it you can best leave it off."
-required = false
-type = { parametertype = "Bool", default = false }
-flag = "-d"
-
-[[endpoints.parameters]]
-id = "return_char_alignments"
-name = "Return character alignments"
-description = "Returns alignments on a character level"
-required = false
-type = { parametertype = "Bool", default = false }
-flag = "-c"
-
-[[endpoints.parameters]]
-id = "minspeakers"
-name = "Minimum number of speakers"
-description = "Setting this helps diarization"
-required = false
-type = { parametertype = "Int" }
-flag = "-m"
-
-[[endpoints.parameters]]
-id = "minspeakers"
-name = "Maximum number of speakers"
-description = "Setting this helps diarization"
-required = false
-type = { parametertype = "Int" }
-flag = "-M"
-
-[[endpoints.parameters]]
-id = "inputwav"
-name = "Input audio (Wav)"
-description = "The file to be transcribed"
-required = false
-type = { parametertype = "File", filetype = "wav", filename = { nametype = "Pattern", value = "\\.wav$" } }
-multiple = true
-
-[[endpoints.parameters]]
-id = "inputmp3"
-name = "Input audio (Mp3)"
-description = "The file to be transcribed"
-required = false
-type = { parametertype = "File", filetype = "mp3", filename = { nametype = "Pattern", value = "\\.mp3$" } }
-multiple = true
-
-[[endpoints.parameters]]
-id = "inputogg"
-name = "Input audio (Ogg)"
-description = "The file to be transcribed"
-required = false
-type = { parametertype = "File", filetype = "ogg", filename = { nametype = "Pattern", value = "\\.ogg$" } }
-multiple = true
-
-[[endpoints.outputfiles]]
-name = "Transcription Only"
-type = "txt"
-filename = { nametype = "Pattern", value = "\\.txt$" }
-
-[[endpoints.outputfiles]]
-name = "Timed transcription (with speaker attribution)"
-type = "srt"
-filename = { nametype = "Pattern", value = "\\.srt$" }
-
-[[endpoints.outputfiles]]
-name = "Timed transcription (with speaker attribution)"
-type = "tsv"
-filename = { nametype = "Pattern", value = "\\.tsv$" }
-
-[[endpoints.outputfiles]]
-name = "Timed transcription (with speaker attribution)"
-type = "ctm"
-filename = { nametype = "Pattern", value = "\\.ctm$" }
-
-[[endpoints.outputfiles]]
-name = "Timed transcription (with speaker attribution)"
-type = "vtt"
-filename = { nametype = "Pattern", value = "\\.vtt$" }
-
-[[endpoints.outputfiles]]
-name = "Timed transcription (with speaker attribution)"
-type = "json"
-filename = { nametype = "Pattern", value = "\\.json$" }
+#copy parameters and output files so we don't need to specify them all again
+parameters_from = "/nl"
+outputfiles_from = "/nl"
 
 #----------------------------------- ITALIAN ASR ----------------------------------------------
 
@@ -897,91 +404,9 @@ args = [ "-p", "11008" ]
 auto_add_args = true
 public = false
 
-[[endpoints.parameters]]
-id = "diarization"
-name = "Diarization"
-description = "Enable diarization (speaker recognition). Note that this has a performance impact so if you don't need it you can best leave it off."
-required = false
-type = { parametertype = "Bool", default = false }
-flag = "-d"
-
-[[endpoints.parameters]]
-id = "return_char_alignments"
-name = "Return character alignments"
-description = "Returns alignments on a character level"
-required = false
-type = { parametertype = "Bool", default = false }
-flag = "-c"
-
-[[endpoints.parameters]]
-id = "minspeakers"
-name = "Minimum number of speakers"
-description = "Setting this helps diarization"
-required = false
-type = { parametertype = "Int" }
-flag = "-m"
-
-[[endpoints.parameters]]
-id = "minspeakers"
-name = "Maximum number of speakers"
-description = "Setting this helps diarization"
-required = false
-type = { parametertype = "Int" }
-flag = "-M"
-
-[[endpoints.parameters]]
-id = "inputwav"
-name = "Input audio (Wav)"
-description = "The file to be transcribed"
-required = false
-type = { parametertype = "File", filetype = "wav", filename = { nametype = "Pattern", value = "\\.wav$" } }
-multiple = true
-
-[[endpoints.parameters]]
-id = "inputmp3"
-name = "Input audio (Mp3)"
-description = "The file to be transcribed"
-required = false
-type = { parametertype = "File", filetype = "mp3", filename = { nametype = "Pattern", value = "\\.mp3$" } }
-multiple = true
-
-[[endpoints.parameters]]
-id = "inputogg"
-name = "Input audio (Ogg)"
-description = "The file to be transcribed"
-required = false
-type = { parametertype = "File", filetype = "ogg", filename = { nametype = "Pattern", value = "\\.ogg$" } }
-multiple = true
-
-[[endpoints.outputfiles]]
-name = "Transcription Only"
-type = "txt"
-filename = { nametype = "Pattern", value = "\\.txt$" }
-
-[[endpoints.outputfiles]]
-name = "Timed transcription (with speaker attribution)"
-type = "srt"
-filename = { nametype = "Pattern", value = "\\.srt$" }
-
-[[endpoints.outputfiles]]
-name = "Timed transcription (with speaker attribution)"
-type = "tsv"
-filename = { nametype = "Pattern", value = "\\.tsv$" }
-
-[[endpoints.outputfiles]]
-name = "Timed transcription (with speaker attribution)"
-type = "ctm"
-filename = { nametype = "Pattern", value = "\\.ctm$" }
-
-[[endpoints.outputfiles]]
-name = "Timed transcription (with speaker attribution)"
-type = "vtt"
-filename = { nametype = "Pattern", value = "\\.vtt$" }
-
-[[endpoints.outputfiles]]
-name = "Timed transcription (with speaker attribution)"
-type = "json"
-filename = { nametype = "Pattern", value = "\\.json$" }
+#copy parameters and output files so we don't need to specify them all again
+parameters_from = "/nl"
+outputfiles_from = "/nl"
 
 #----------------------------------- SPANISH ASR ----------------------------------------------
 
@@ -998,91 +423,9 @@ args = [ "-p", "11009" ]
 auto_add_args = true
 public = false
 
-[[endpoints.parameters]]
-id = "diarization"
-name = "Diarization"
-description = "Enable diarization (speaker recognition). Note that this has a performance impact so if you don't need it you can best leave it off."
-required = false
-type = { parametertype = "Bool", default = false }
-flag = "-d"
-
-[[endpoints.parameters]]
-id = "return_char_alignments"
-name = "Return character alignments"
-description = "Returns alignments on a character level"
-required = false
-type = { parametertype = "Bool", default = false }
-flag = "-c"
-
-[[endpoints.parameters]]
-id = "minspeakers"
-name = "Minimum number of speakers"
-description = "Setting this helps diarization"
-required = false
-type = { parametertype = "Int" }
-flag = "-m"
-
-[[endpoints.parameters]]
-id = "minspeakers"
-name = "Maximum number of speakers"
-description = "Setting this helps diarization"
-required = false
-type = { parametertype = "Int" }
-flag = "-M"
-
-[[endpoints.parameters]]
-id = "inputwav"
-name = "Input audio (Wav)"
-description = "The file to be transcribed"
-required = false
-type = { parametertype = "File", filetype = "wav", filename = { nametype = "Pattern", value = "\\.wav$" } }
-multiple = true
-
-[[endpoints.parameters]]
-id = "inputmp3"
-name = "Input audio (Mp3)"
-description = "The file to be transcribed"
-required = false
-type = { parametertype = "File", filetype = "mp3", filename = { nametype = "Pattern", value = "\\.mp3$" } }
-multiple = true
-
-[[endpoints.parameters]]
-id = "inputogg"
-name = "Input audio (Ogg)"
-description = "The file to be transcribed"
-required = false
-type = { parametertype = "File", filetype = "ogg", filename = { nametype = "Pattern", value = "\\.ogg$" } }
-multiple = true
-
-[[endpoints.outputfiles]]
-name = "Transcription Only"
-type = "txt"
-filename = { nametype = "Pattern", value = "\\.txt$" }
-
-[[endpoints.outputfiles]]
-name = "Timed transcription (with speaker attribution)"
-type = "srt"
-filename = { nametype = "Pattern", value = "\\.srt$" }
-
-[[endpoints.outputfiles]]
-name = "Timed transcription (with speaker attribution)"
-type = "tsv"
-filename = { nametype = "Pattern", value = "\\.tsv$" }
-
-[[endpoints.outputfiles]]
-name = "Timed transcription (with speaker attribution)"
-type = "ctm"
-filename = { nametype = "Pattern", value = "\\.ctm$" }
-
-[[endpoints.outputfiles]]
-name = "Timed transcription (with speaker attribution)"
-type = "vtt"
-filename = { nametype = "Pattern", value = "\\.vtt$" }
-
-[[endpoints.outputfiles]]
-name = "Timed transcription (with speaker attribution)"
-type = "json"
-filename = { nametype = "Pattern", value = "\\.json$" }
+#copy parameters and output files so we don't need to specify them all again
+parameters_from = "/nl"
+outputfiles_from = "/nl"
 
 #----------------------------------- PORTUGUESE ASR ----------------------------------------------
 
@@ -1099,91 +442,9 @@ args = [ "-p", "11010" ]
 auto_add_args = true
 public = false
 
-[[endpoints.parameters]]
-id = "diarization"
-name = "Diarization"
-description = "Enable diarization (speaker recognition). Note that this has a performance impact so if you don't need it you can best leave it off."
-required = false
-type = { parametertype = "Bool", default = false }
-flag = "-d"
-
-[[endpoints.parameters]]
-id = "return_char_alignments"
-name = "Return character alignments"
-description = "Returns alignments on a character level"
-required = false
-type = { parametertype = "Bool", default = false }
-flag = "-c"
-
-[[endpoints.parameters]]
-id = "minspeakers"
-name = "Minimum number of speakers"
-description = "Setting this helps diarization"
-required = false
-type = { parametertype = "Int" }
-flag = "-m"
-
-[[endpoints.parameters]]
-id = "minspeakers"
-name = "Maximum number of speakers"
-description = "Setting this helps diarization"
-required = false
-type = { parametertype = "Int" }
-flag = "-M"
-
-[[endpoints.parameters]]
-id = "inputwav"
-name = "Input audio (Wav)"
-description = "The file to be transcribed"
-required = false
-type = { parametertype = "File", filetype = "wav", filename = { nametype = "Pattern", value = "\\.wav$" } }
-multiple = true
-
-[[endpoints.parameters]]
-id = "inputmp3"
-name = "Input audio (Mp3)"
-description = "The file to be transcribed"
-required = false
-type = { parametertype = "File", filetype = "mp3", filename = { nametype = "Pattern", value = "\\.mp3$" } }
-multiple = true
-
-[[endpoints.parameters]]
-id = "inputogg"
-name = "Input audio (Ogg)"
-description = "The file to be transcribed"
-required = false
-type = { parametertype = "File", filetype = "ogg", filename = { nametype = "Pattern", value = "\\.ogg$" } }
-multiple = true
-
-[[endpoints.outputfiles]]
-name = "Transcription Only"
-type = "txt"
-filename = { nametype = "Pattern", value = "\\.txt$" }
-
-[[endpoints.outputfiles]]
-name = "Timed transcription (with speaker attribution)"
-type = "srt"
-filename = { nametype = "Pattern", value = "\\.srt$" }
-
-[[endpoints.outputfiles]]
-name = "Timed transcription (with speaker attribution)"
-type = "tsv"
-filename = { nametype = "Pattern", value = "\\.tsv$" }
-
-[[endpoints.outputfiles]]
-name = "Timed transcription (with speaker attribution)"
-type = "ctm"
-filename = { nametype = "Pattern", value = "\\.ctm$" }
-
-[[endpoints.outputfiles]]
-name = "Timed transcription (with speaker attribution)"
-type = "vtt"
-filename = { nametype = "Pattern", value = "\\.vtt$" }
-
-[[endpoints.outputfiles]]
-name = "Timed transcription (with speaker attribution)"
-type = "json"
-filename = { nametype = "Pattern", value = "\\.json$" }
+#copy parameters and output files so we don't need to specify them all again
+parameters_from = "/nl"
+outputfiles_from = "/nl"
 
 #----------------------------------- UKRAINIAN ASR ----------------------------------------------
 
@@ -1200,88 +461,6 @@ args = [ "-p", "11011" ]
 auto_add_args = true
 public = false
 
-[[endpoints.parameters]]
-id = "diarization"
-name = "Diarization"
-description = "Enable diarization (speaker recognition). Note that this has a performance impact so if you don't need it you can best leave it off."
-required = false
-type = { parametertype = "Bool", default = false }
-flag = "-d"
-
-[[endpoints.parameters]]
-id = "return_char_alignments"
-name = "Return character alignments"
-description = "Returns alignments on a character level"
-required = false
-type = { parametertype = "Bool", default = false }
-flag = "-c"
-
-[[endpoints.parameters]]
-id = "minspeakers"
-name = "Minimum number of speakers"
-description = "Setting this helps diarization"
-required = false
-type = { parametertype = "Int" }
-flag = "-m"
-
-[[endpoints.parameters]]
-id = "minspeakers"
-name = "Maximum number of speakers"
-description = "Setting this helps diarization"
-required = false
-type = { parametertype = "Int" }
-flag = "-M"
-
-[[endpoints.parameters]]
-id = "inputwav"
-name = "Input audio (Wav)"
-description = "The file to be transcribed"
-required = false
-type = { parametertype = "File", filetype = "wav", filename = { nametype = "Pattern", value = "\\.wav$" } }
-multiple = true
-
-[[endpoints.parameters]]
-id = "inputmp3"
-name = "Input audio (Mp3)"
-description = "The file to be transcribed"
-required = false
-type = { parametertype = "File", filetype = "mp3", filename = { nametype = "Pattern", value = "\\.mp3$" } }
-multiple = true
-
-[[endpoints.parameters]]
-id = "inputogg"
-name = "Input audio (Ogg)"
-description = "The file to be transcribed"
-required = false
-type = { parametertype = "File", filetype = "ogg", filename = { nametype = "Pattern", value = "\\.ogg$" } }
-multiple = true
-
-[[endpoints.outputfiles]]
-name = "Transcription Only"
-type = "txt"
-filename = { nametype = "Pattern", value = "\\.txt$" }
-
-[[endpoints.outputfiles]]
-name = "Timed transcription (with speaker attribution)"
-type = "srt"
-filename = { nametype = "Pattern", value = "\\.srt$" }
-
-[[endpoints.outputfiles]]
-name = "Timed transcription (with speaker attribution)"
-type = "tsv"
-filename = { nametype = "Pattern", value = "\\.tsv$" }
-
-[[endpoints.outputfiles]]
-name = "Timed transcription (with speaker attribution)"
-type = "ctm"
-filename = { nametype = "Pattern", value = "\\.ctm$" }
-
-[[endpoints.outputfiles]]
-name = "Timed transcription (with speaker attribution)"
-type = "vtt"
-filename = { nametype = "Pattern", value = "\\.vtt$" }
-
-[[endpoints.outputfiles]]
-name = "Timed transcription (with speaker attribution)"
-type = "json"
-filename = { nametype = "Pattern", value = "\\.json$" }
+#copy parameters and output files so we don't need to specify them all again
+parameters_from = "/nl"
+outputfiles_from = "/nl"
