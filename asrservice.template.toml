@@ -44,9 +44,34 @@ name = "MP3 Audio"
 contenttype = "audio/mpeg"
 
 [[filetypes]]
+id = "m4a"
+name = "MP4 Audio"
+contenttype = "audio/mp4"
+
+[[filetypes]]
 id = "ogg"
 name = "Ogg Audio"
 contenttype = "audio/ogg"
+
+[[filetypes]]
+id = "flac"
+name = "Flac Audio"
+contenttype = "audio/flac"
+
+[[filetypes]]
+id = "opus"
+name = "Opus Audio"
+contenttype = "audio/opus"
+
+[[filetypes]]
+id = "wma"
+name = "Windows Media Audio"
+contenttype = "audio/x-ms-wma"
+
+[[filetypes]]
+id = "aiff"
+name = "AIFF"
+contenttype = "audio/aiff"
 
 [[filetypes]]
 id = "srt"
@@ -240,6 +265,47 @@ name = "Input audio (Ogg)"
 description = "The file to be transcribed"
 required = false
 type = { parametertype = "File", filetype = "ogg", filename = { nametype = "Pattern", value = "\\.ogg$" } }
+multiple = true
+
+
+[[endpoints.parameters]]
+id = "inputopus"
+name = "Input audio (Opus)"
+description = "The file to be transcribed"
+required = false
+type = { parametertype = "File", filetype = "opus", filename = { nametype = "Pattern", value = "\\.opus$" } }
+multiple = true
+
+[[endpoints.parameters]]
+id = "inputflac"
+name = "Input audio (Flac)"
+description = "The file to be transcribed"
+required = false
+type = { parametertype = "File", filetype = "flac", filename = { nametype = "Pattern", value = "\\.flac$" } }
+multiple = true
+
+[[endpoints.parameters]]
+id = "inputm4a"
+name = "Input audio (M4A)"
+description = "The file to be transcribed"
+required = false
+type = { parametertype = "File", filetype = "m4a", filename = { nametype = "Pattern", value = "\\.m4a$" } }
+multiple = true
+
+[[endpoints.parameters]]
+id = "inputaiff"
+name = "Input audio (AIFF)"
+description = "The file to be transcribed"
+required = false
+type = { parametertype = "File", filetype = "aiff", filename = { nametype = "Pattern", value = "\\.aiff$" } }
+multiple = true
+
+[[endpoints.parameters]]
+id = "inputaiff"
+name = "Input audio (WMA)"
+description = "The file to be transcribed"
+required = false
+type = { parametertype = "File", filetype = "wma", filename = { nametype = "Pattern", value = "\\.wma$" } }
 multiple = true
 
 [[endpoints.outputfiles]]
